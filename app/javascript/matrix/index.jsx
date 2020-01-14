@@ -8,28 +8,25 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import App from './components/app';
 
-import messagesReducer from './reducers/messages_reducer';
-import channelsReducer from './reducers/channels_reducer';
+import tasksReducer from './reducers/tasks_reducer';
 
 const middlewares = applyMiddleware(reduxPromise, logger);
 
 const reducers = combineReducers({
-    messages: messagesReducer,
-    channels: channelsReducer,
+    tasks: tasksReducer,
 });
 
 const initialState = {
-    messages: [],
-    channels: [],
+    tasks: [],
 };
 
 ReactDOM.render(
     <Provider store={createStore(reducers, initialState, middlewares)}>
         <Router>
             <Switch>
-                <Route exact path="/channels/:channel" component={App} />
+                <Route path="/matrices/:matrix" component={App} />
             </Switch>
         </Router>
     </Provider>,
-    document.getElementById('chat_app')
+    document.getElementById('matrix_app')
 );
