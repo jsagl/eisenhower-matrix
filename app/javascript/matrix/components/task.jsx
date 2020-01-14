@@ -1,10 +1,10 @@
 import React from 'react';
 // import styled from 'styled-components';
 
-const Task = () => {
+const Task = (props) => {
     return (
         <div>
-            <p>Task</p>
+            <p>{props.name}</p>
         </div>
     );
 };

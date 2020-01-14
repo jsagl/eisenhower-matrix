@@ -6,7 +6,7 @@ import { logger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import App from './components/app';
+import Matrix from './components/matrix';
 
 import tasksReducer from './reducers/tasks_reducer';
 
@@ -24,7 +24,7 @@ ReactDOM.render(
     <Provider store={createStore(reducers, initialState, middlewares)}>
         <Router>
             <Switch>
-                <Route path="/matrices/:matrix" component={App} />
+                <Route path="/matrices/:matrix" component={Matrix} />
             </Switch>
         </Router>
     </Provider>,

@@ -1,15 +1,15 @@
-// import { FETCH_CHANNELS } from '../actions/index'
+import { FETCH_TASKS } from '../actions/index'
 
 const tasksReducer = (state, action) => {
-    // if (state === undefined) {
-        // Reducer initialisation
+    if (state === undefined) {
         return [];
-    // }
-    // switch (action.type) {
-    //     case FETCH_CHANNELS:
-    //         return action.payload;
-    //     default:
-    //         return state;
-    // }
+    }
+
+    switch (action.type) {
+        case FETCH_TASKS:
+            return action.payload;
+        default:
+            return state;
+    }
 };
 export default tasksReducer;
