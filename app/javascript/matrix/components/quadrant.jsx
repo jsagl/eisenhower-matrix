@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 
 import Task from './task'
 
-const Quadrant = () => {
-    const tasks = useSelector(state => state.tasks);
+const Quadrant = (props) => {
+    const tasks = useSelector(state => state.tasks.filter(tasks => tasks.status === props.tasksFilter));
 
     return (
         <div className="col-6 card">

@@ -16,9 +16,9 @@ matrix1 = Matrix.create(user: user, name: 'Perso')
 matrix2 = Matrix.create(user: user, name: 'Pro')
 
 7.times do
-  Task.create(matrix: matrix1, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: 0, due_date: Date.today + (1..30).to_a.sample.days)
+  Task.create(matrix: matrix1, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: (0..5).to_a.sample, due_date: Date.today + (1..30).to_a.sample.days)
 end
 
 7.times do
-  Task.create(matrix: matrix2, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: 0, due_date: Date.today + (1..30).to_a.sample.days)
+  Task.create(matrix: matrix2, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: (0..5).to_a.sample, due_date: Date.today + (1..30).to_a.sample.days)
 end
