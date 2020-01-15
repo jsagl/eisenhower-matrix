@@ -3,23 +3,20 @@ import NewTaskForm from "./new_task_form";
 // import styled from 'styled-components';
 
 const CreateTaskButton = (props) => {
-    const [modalVisibility, setModalVisibility] = useState('hidden');
+    const [modalDisplay, setModalDisplay] = useState('none');
 
     const handleClick = () => {
         const modal = document.getElementById('new-task-modal');
 
-        console.log(modal);
-        console.log(modal.style);
-
-        if (modal && (modal.style.visibility === 'hidden' || modal.style.visibility === '')) {
-            setModalVisibility('visible');
+        if (modal && (modal.style.display === 'none' || modal.style.display === '')) {
+            setModalDisplay('block');
         }
     };
 
     return (
         <div >
             <button className="btn btn-primary" onClick={()=>{handleClick()}}>Create Task</button>
-            <NewTaskForm visibility={modalVisibility}/>
+            <NewTaskForm display={modalDisplay} setDisplay={setModalDisplay}/>
         </div>
     );
 };
