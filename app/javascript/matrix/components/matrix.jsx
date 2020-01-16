@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { DndProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
 import styled from 'styled-components';
 
 import Quadrant from './quadrant';
@@ -24,26 +26,28 @@ const Matrix = () => {
     }, [dispatch]);
 
     return (
-        <Container className="">
-            <CreateTaskButton/>
-            <div className="row justify-content-center">
-                <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
-            </div>
-            <br/>
-            <div className="row justify-content-center">
-                <Quadrant tasksFilter={positionToNum.importantUrgent}/>
-                <Quadrant tasksFilter={positionToNum.importantNotUrgent}/>
-            </div>
-            <div className="row justify-content-center">
-                <Quadrant tasksFilter={positionToNum.notImportantUrgent}/>
-                <Quadrant tasksFilter={positionToNum.notImportantNotUrgent}/>
-            </div>
-            <br/>
-            <div className="row justify-content-center">
-                <DoneTasksBox tasksFilter={positionToNum.done}/>
-            </div>
-            <NewTaskModal/>
-        </Container>
+        <DndProvider backend={Backend}>
+            <Container className="">
+                <CreateTaskButton/>
+                <div className="row justify-content-center">
+                    <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
+                </div>
+                <br/>
+                <div className="row justify-content-center">
+                    <Quadrant tasksFilter={positionToNum.importantUrgent}/>
+                    <Quadrant tasksFilter={positionToNum.importantNotUrgent}/>
+                </div>
+                <div className="row justify-content-center">
+                    <Quadrant tasksFilter={positionToNum.notImportantUrgent}/>
+                    <Quadrant tasksFilter={positionToNum.notImportantNotUrgent}/>
+                </div>
+                <br/>
+                <div className="row justify-content-center">
+                    <DoneTasksBox tasksFilter={positionToNum.done}/>
+                </div>
+                <NewTaskModal/>
+            </Container>
+        </DndProvider>
     );
 };
 

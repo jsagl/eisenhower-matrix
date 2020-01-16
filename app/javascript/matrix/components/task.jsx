@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { useDrag } from 'react-dnd'
 
 import { updateTask } from "../actions";
 import { positionToNum } from "./matrix";
@@ -24,32 +25,28 @@ const Task = (props) => {
     const matrixId = useParams().matrix;
     const dispatch = useDispatch();
 
-    const handleChange = (e) => {
-        setStatus(e.target.value);
-        dispatch(updateTask(matrixId, props.task.id, {status: e.target.value}))
-    };
+    const [{isDragging}, drag] = useDrag({
+        item: {
+            type: 'TASK',
+            task: props.task
+        },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    });
 
     return (
-        <Container>
-            <p>{props.task.name}</p>
-            <form action="">
-                <div className="form-group">
-                    <select
-                        name="moveTaskSelect"
-                        className="form-control"
-                        id={`move-task-field-${props.task.id}`}
-                        onChange={handleChange}
-                        value={status}
-                    >
-                        <option value={positionToNum.toBeAssigned}>Unassigned</option>
-                        <option value={positionToNum.importantUrgent}>Important & Urgent</option>
-                        <option value={positionToNum.importantNotUrgent}>Important & Not Urgent</option>
-                        <option value={positionToNum.notImportantUrgent}>Not Important & Urgent</option>
-                        <option value={positionToNum.notImportantNotUrgent}>Not Important & Not Urgent</option>
-                    </select>
-                </div>
-            </form>
-        </Container>
+        <div
+            ref={drag}
+            style={{
+                opacity: isDragging ? 0.5 : 1,
+                cursor: 'move',
+            }}
+        >
+            <Container>
+                <p>{props.task.name}</p>
+            </Container>
+        </div>
     );
 };
 
