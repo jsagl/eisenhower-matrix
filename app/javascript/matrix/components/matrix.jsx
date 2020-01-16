@@ -9,7 +9,9 @@ import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
 import DoneTasksBox from "./doneTasksBox";
 import CreateTaskButton from './create_task_button';
+import UpdatedTaskButton from "./updated_task_button";
 import TaskModal from './task_modal';
+import UpdatedTaskModal from "./updated_task_modal";
 import {fetchTasks} from "../actions";
 
 const Container = styled.div`
@@ -28,6 +30,7 @@ const Matrix = () => {
         <DndProvider backend={Backend}>
             <Container className="">
                 <CreateTaskButton/>
+                <UpdatedTaskButton/>
                 <div className="row justify-content-center">
                     <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
                 </div>
@@ -45,6 +48,7 @@ const Matrix = () => {
                     <DoneTasksBox tasksFilter={positionToNum.done}/>
                 </div>
                 <TaskModal/>
+                <UpdatedTaskModal/>
             </Container>
         </DndProvider>
     );

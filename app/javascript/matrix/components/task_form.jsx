@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
-import { createTask } from '../actions/index';
+import {closeModal, createTask, updateTask} from '../actions/index';
 import { positionToNum } from "./matrix";
 
 const TaskForm = (props) => {
     const matrixId = useParams().matrix;
-    const [nameInput, setNameInput] = useState('');
-    const [descriptionInput, setDescriptionInput] = useState('');
-    const [status, setStatus] = useState('Unassigned');
+    const modalType = useSelector(state => state.taskModal.modalType);
+    const modalProps = useSelector(state => state.taskModal.modalProps);
+
+    const initialName = modalType === 'TASK_UPDATE' ? modalProps.task.name : '';
+    const initialDescription = modalType === 'TASK_UPDATE' ? modalProps.task.description : '';
+    const initialStatus = modalType === 'TASK_UPDATE' ? modalProps.task.status : positionToNum.toBeAssigned;
+
+    const [nameInput, setNameInput] = useState(initialName);
+    const [descriptionInput, setDescriptionInput] = useState(initialDescription);
+    const [status, setStatus] = useState(initialStatus);
 
     const dispatch = useDispatch();
 
@@ -32,11 +39,16 @@ const TaskForm = (props) => {
             status: status
         };
 
-        dispatch(createTask(body, matrixId));
+        if (modalType === 'TASK_UPDATE') {
+            dispatch(updateTask(matrixId, modalProps.task.id, body))
+        } else {
+            dispatch(createTask(body, matrixId));
+        }
+
         setNameInput('');
         setDescriptionInput('');
         setStatus('Unassigned');
-        props.dismissModal();
+        dispatch(closeModal());
     };
 
     return (

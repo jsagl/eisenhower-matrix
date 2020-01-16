@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useDrag } from 'react-dnd'
 
-import { updateTask } from "../actions";
+import {openModal, updateTask} from "../actions";
 import { positionToNum } from "./matrix";
 
 const Container = styled.div`
@@ -36,7 +36,7 @@ const Task = (props) => {
     });
 
     const openTaskForm = () => {
-
+        dispatch(openModal('TASK_UPDATE', {task: props.task}));
     };
 
     const closeTask = () => {
@@ -52,7 +52,7 @@ const Task = (props) => {
                 opacity: isDragging ? 0.5 : 1,
                 cursor: 'move',
             }}
-            // onClick={openTaskForm}
+            onClick={openTaskForm}
         >
             <Container>
                 <div

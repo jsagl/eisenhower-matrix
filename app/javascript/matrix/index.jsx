@@ -9,15 +9,23 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Matrix from './components/matrix';
 
 import tasksReducer from './reducers/tasks_reducer';
+import taskModalReducer from "./reducers/task_modal_reducer";
 
 const middlewares = applyMiddleware(reduxPromise, logger);
 
 const reducers = combineReducers({
     tasks: tasksReducer,
+    taskModal: taskModalReducer,
+
 });
 
 const initialState = {
     tasks: [],
+    taskModal: {
+        display: false,
+        modalType: 'TASK_CREATION',
+        modalProps: {}
+    }
 };
 
 ReactDOM.render(

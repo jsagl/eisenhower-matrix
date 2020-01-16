@@ -1,6 +1,8 @@
 const FETCH_TASKS = 'FETCH_TASKS';
 const CREATE_TASK = 'CREATE_TASK';
 const UPDATE_TASK = 'UPDATE_TASK';
+const CLOSE_MODAL = 'CLOSE_MODAL';
+const OPEN_MODAL = 'OPEN_MODAL';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
@@ -35,6 +37,26 @@ const createTask = (body, matrixId) => {
     }
 };
 
+const closeModal = () => {
+    return {
+        type: CLOSE_MODAL,
+        payload: {
+            display: false,
+        }
+    }
+};
+
+const openModal = (modalType, modalProps = {}) => {
+    return {
+        type: OPEN_MODAL,
+        payload: {
+            display: true,
+            modalType: modalType,
+            modalProps: modalProps
+        }
+    }
+}
+
 const updateTask = (matrixId, taskId, body) => {
     const promise = fetch(
         `/api/v1/matrices/${matrixId}/tasks/${taskId}`,
@@ -60,4 +82,6 @@ export {
     fetchTasks, FETCH_TASKS,
     createTask, CREATE_TASK,
     updateTask, UPDATE_TASK,
+    closeModal, CLOSE_MODAL,
+    openModal, OPEN_MODAL
 }
