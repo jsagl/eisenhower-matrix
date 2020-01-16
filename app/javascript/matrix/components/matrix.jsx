@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
 import Quadrant from './quadrant';
+import UnassignedTasksBox from "./unassigned_tasks_box";
+import DoneTasksBox from "./doneTasksBox";
 import CreateTaskButton from './create_task_button';
+import NewTaskModal from './new_task_modal';
 import {fetchTasks} from "../actions";
 
-const positionToNum = {
-    toBeAssigned: 0,
-    importantUrgent: 1,
-    importantNotUrgent: 2,
-    notImportantUrgent: 3,
-    notImportantNotUrgent: 4,
-    done: 5
-};
+const Container = styled.div`
+  margin: 50px 100px;
+`;
+
 
 const Matrix = () => {
     const dispatch = useDispatch();
@@ -25,10 +24,10 @@ const Matrix = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <Container className="">
             <CreateTaskButton/>
             <div className="row justify-content-center">
-                <Quadrant tasksFilter={positionToNum.toBeAssigned}/>
+                <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
             </div>
             <br/>
             <div className="row justify-content-center">
@@ -41,10 +40,21 @@ const Matrix = () => {
             </div>
             <br/>
             <div className="row justify-content-center">
-                <Quadrant tasksFilter={positionToNum.done}/>
+                <DoneTasksBox tasksFilter={positionToNum.done}/>
             </div>
-        </div>
+            <NewTaskModal/>
+        </Container>
     );
 };
 
+const positionToNum = {
+    toBeAssigned: 0,
+    importantUrgent: 1,
+    importantNotUrgent: 2,
+    notImportantUrgent: 3,
+    notImportantNotUrgent: 4,
+    done: 5
+};
+
 export default Matrix;
+export { positionToNum };
