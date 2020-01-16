@@ -1,26 +1,27 @@
-import React from 'react';
-import TaskForm from './task_form';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+
+import {closeModal} from "../actions";
+import TaskForm from "./task_form";
 
 const TaskModal = () => {
-    const dismissModal = () => document.getElementById('closeNewTaskModal').click();
+    const show = useSelector(state => state.taskModal.display);
+    const title = useSelector(state => state.taskModal.modalProps.title);
+    const dispatch = useDispatch();
+
+    const handleClose = () => dispatch(closeModal());
 
     return (
-        <div className="modal fade" id="taskModal" tabIndex="-1" role="dialog" aria-labelledby="taskModalLabel"
-             aria-hidden="true">
-            <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="taskModalLabel">Modal title</h5>
-                        <button id="closeNewTaskModal" type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <TaskForm dismissModal={dismissModal}/>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <TaskForm />
+            </Modal.Body>
+        </Modal>
     );
 };
 

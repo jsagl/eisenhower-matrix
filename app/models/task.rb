@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :matrix
+  belongs_to :category
 
   class Status
     UNASSIGNED = 0

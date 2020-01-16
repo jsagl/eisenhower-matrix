@@ -24,7 +24,7 @@ const initialState = {
     taskModal: {
         display: false,
         modalType: 'TASK_CREATION',
-        modalProps: {}
+        modalProps: {title: 'Create task'}
     }
 };
 

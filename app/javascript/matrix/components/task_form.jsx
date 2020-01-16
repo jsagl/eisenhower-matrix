@@ -92,7 +92,7 @@ const TaskForm = (props) => {
                     <option value={positionToNum.notImportantNotUrgent}>Not Important & Not Urgent</option>
                 </select>
             </div>
-            <button type="submit" className="btn btn-primary">Create task</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
     );
 };

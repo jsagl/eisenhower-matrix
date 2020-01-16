@@ -1,4 +1,4 @@
-import { FETCH_TASKS, CREATE_TASK, UPDATE_TASK } from '../actions/index'
+import { FETCH_TASKS, CREATE_TASK, UPDATE_TASK, DELETE_TASK } from '../actions/index'
 
 const tasksReducer = (state, action) => {
     if (state === undefined) {
@@ -20,6 +20,14 @@ const tasksReducer = (state, action) => {
                    updatedTasksList[i] = updatedTask;
                    return true
                }
+            });
+            return updatedTasksList;
+        case DELETE_TASK:
+            updatedTasksList.find((task, i, updatedTasksList) => {
+                if (task.id === action.taskId) {
+                    updatedTasksList.splice(i,1);
+                    return true
+                }
             });
             return updatedTasksList;
         default:

@@ -1,6 +1,7 @@
 const FETCH_TASKS = 'FETCH_TASKS';
 const CREATE_TASK = 'CREATE_TASK';
 const UPDATE_TASK = 'UPDATE_TASK';
+const DELETE_TASK = 'DELETE_TASK';
 const CLOSE_MODAL = 'CLOSE_MODAL';
 const OPEN_MODAL = 'OPEN_MODAL';
 
@@ -46,7 +47,7 @@ const closeModal = () => {
     }
 };
 
-const openModal = (modalType, modalProps = {}) => {
+const openModal = (modalType, modalProps = {title: 'Create task'}) => {
     return {
         type: OPEN_MODAL,
         payload: {
@@ -55,7 +56,7 @@ const openModal = (modalType, modalProps = {}) => {
             modalProps: modalProps
         }
     }
-}
+};
 
 const updateTask = (matrixId, taskId, body) => {
     const promise = fetch(
@@ -76,12 +77,34 @@ const updateTask = (matrixId, taskId, body) => {
         type: UPDATE_TASK,
         payload: promise
     }
-}
+};
+
+const deleteTask = (matrixId, taskId) => {
+    const promise = fetch(
+        `/api/v1/matrices/${matrixId}/tasks/${taskId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                'X-CSRF-Token': csrfToken
+            },
+            credentials: 'same-origin'
+        }
+    );
+
+    return {
+        type: DELETE_TASK,
+        payload: promise,
+        taskId: taskId
+    }
+};
 
 export {
     fetchTasks, FETCH_TASKS,
     createTask, CREATE_TASK,
     updateTask, UPDATE_TASK,
+    deleteTask, DELETE_TASK,
     closeModal, CLOSE_MODAL,
     openModal, OPEN_MODAL
 }

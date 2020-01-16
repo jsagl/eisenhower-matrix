@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useDrag } from 'react-dnd'
 
-import {openModal, updateTask} from "../actions";
+import {openModal, updateTask, deleteTask} from "../actions";
 import { positionToNum } from "./matrix";
 
 const Container = styled.div`
@@ -17,6 +17,14 @@ const Container = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  cursor: pointer;
+`;
+
+const ColorMarker = styled.div`
+  width: 8px;
+  height: 20px;
+  margin-right: 10px;
+  background-color: ${props => props.color};
 `;
 
 const Task = (props) => {
@@ -35,13 +43,21 @@ const Task = (props) => {
         }),
     });
 
-    const openTaskForm = () => {
-        dispatch(openModal('TASK_UPDATE', {task: props.task}));
+    const openTaskModal = (e) => {
+        if (e.target.tagName !== 'I') {
+            dispatch(openModal('TASK_UPDATE', {task: props.task, title: 'Update task'}));
+        }
     };
 
-    const closeTask = () => {
+    const setTaskAsDone = () => {
         if (props.task.status !== 5) {
             dispatch(updateTask(matrixId, props.task.id, {status: positionToNum.done}))
+        }
+    };
+
+    const openDeleteConfirmation = () => {
+        if (window.confirm("Are you sure you wish to delete this task?")){
+            return dispatch(deleteTask(matrixId, props.task.id));
         }
     };
 
@@ -50,18 +66,22 @@ const Task = (props) => {
             ref={drag}
             style={{
                 opacity: isDragging ? 0.5 : 1,
-                cursor: 'move',
             }}
-            onClick={openTaskForm}
+            onClick={openTaskModal}
         >
             <Container>
+                <ColorMarker color={props.task.category_color} />
                 <div
-                    onClick={closeTask}
-                    style={{cursor: 'pointer'}}
+                    onClick={setTaskAsDone}
                 >
                     <i className={checkboxClass}/>
                 </div>
                 <span>{props.task.name}</span>
+                <div
+                    onClick={openDeleteConfirmation}
+                >
+                    <i className="fas fa-times"></i>
+                </div>
             </Container>
         </div>
     );
