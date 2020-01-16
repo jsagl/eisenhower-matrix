@@ -15,15 +15,15 @@ const Container = styled.div`
   border-radius: 3px;
   background-color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
 `;
 
 const Task = (props) => {
-    const initialStatus = props.task.status;
-    const [status, setStatus] = useState(initialStatus);
     const matrixId = useParams().matrix;
     const dispatch = useDispatch();
+
+    const [checkboxClass, setCheckboxClass] = useState(props.task.status === 5 ? 'fas fa-check' : 'far fa-square');
 
     const [{isDragging}, drag] = useDrag({
         item: {
@@ -35,6 +35,16 @@ const Task = (props) => {
         }),
     });
 
+    const openTaskForm = () => {
+
+    };
+
+    const closeTask = () => {
+        if (props.task.status !== 5) {
+            dispatch(updateTask(matrixId, props.task.id, {status: positionToNum.done}))
+        }
+    };
+
     return (
         <div
             ref={drag}
@@ -42,9 +52,16 @@ const Task = (props) => {
                 opacity: isDragging ? 0.5 : 1,
                 cursor: 'move',
             }}
+            // onClick={openTaskForm}
         >
             <Container>
-                <p>{props.task.name}</p>
+                <div
+                    onClick={closeTask}
+                    style={{cursor: 'pointer'}}
+                >
+                    <i className={checkboxClass}/>
+                </div>
+                <span>{props.task.name}</span>
             </Container>
         </div>
     );

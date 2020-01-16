@@ -9,13 +9,12 @@ import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
 import DoneTasksBox from "./doneTasksBox";
 import CreateTaskButton from './create_task_button';
-import NewTaskModal from './new_task_modal';
+import TaskModal from './new_task_modal';
 import {fetchTasks} from "../actions";
 
 const Container = styled.div`
   margin: 50px 100px;
 `;
-
 
 const Matrix = () => {
     const dispatch = useDispatch();
@@ -45,7 +44,7 @@ const Matrix = () => {
                 <div className="row justify-content-center">
                     <DoneTasksBox tasksFilter={positionToNum.done}/>
                 </div>
-                <NewTaskModal/>
+                <TaskModal/>
             </Container>
         </DndProvider>
     );
