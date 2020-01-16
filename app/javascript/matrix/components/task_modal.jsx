@@ -1,5 +1,5 @@
 import React from 'react';
-import NewTaskForm from './new_task_form';
+import TaskForm from './task_form';
 
 const TaskModal = () => {
     const dismissModal = () => document.getElementById('closeNewTaskModal').click();
@@ -16,7 +16,7 @@ const TaskModal = () => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <NewTaskForm dismissModal={dismissModal}/>
+                        <TaskForm dismissModal={dismissModal}/>
                     </div>
                 </div>
             </div>

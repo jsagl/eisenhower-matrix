@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { createTask } from '../actions/index';
 import { positionToNum } from "./matrix";
 
-const NewTaskForm = (props) => {
+const TaskForm = (props) => {
     const matrixId = useParams().matrix;
     const [nameInput, setNameInput] = useState('');
     const [descriptionInput, setDescriptionInput] = useState('');
@@ -85,4 +85,4 @@ const NewTaskForm = (props) => {
     );
 };
 
-export default NewTaskForm;
+export default TaskForm;

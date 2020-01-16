@@ -9,7 +9,7 @@ import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
 import DoneTasksBox from "./doneTasksBox";
 import CreateTaskButton from './create_task_button';
-import TaskModal from './new_task_modal';
+import TaskModal from './task_modal';
 import {fetchTasks} from "../actions";
 
 const Container = styled.div`
