@@ -1,4 +1,4 @@
-import {CREATE_CATEGORY, DELETE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../actions";
+import {CREATE_CATEGORY, FETCH_CATEGORIES, UPDATE_CATEGORY} from "../actions";
 
 const categoriesReducer = (state, action) => {
     if (state === undefined) {
@@ -18,14 +18,6 @@ const categoriesReducer = (state, action) => {
             updatedCategoryList.find((task, i, updatedCategoryList) => {
                 if (task.id === updatedTask.id) {
                     updatedCategoryList[i] = updatedTask;
-                    return true
-                }
-            });
-            return updatedCategoryList;
-        case DELETE_CATEGORY:
-            updatedCategoryList.find((task, i, updatedCategoryList) => {
-                if (task.id === action.taskId) {
-                    updatedCategoryList.splice(i,1);
                     return true
                 }
             });

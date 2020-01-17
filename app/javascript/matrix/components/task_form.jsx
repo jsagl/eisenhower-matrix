@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
+import DatePicker from "react-datepicker/es";
 
 import {closeTaskModal, createTask, updateTask} from '../actions/index';
 import { positionToNum } from "./matrix";
@@ -16,12 +17,21 @@ const TaskForm = (props) => {
     const initialDescription = modalType === 'TASK_UPDATE' ? modalProps.task.description : '';
     const initialCategory = modalType === 'TASK_UPDATE' ? modalProps.task.category_id : categories[0].id;
     const initialStatus = modalType === 'TASK_UPDATE' ? modalProps.task.status : positionToNum.toBeAssigned;
+    const initialDate = modalType === 'TASK_UPDATE' ? new Date(modalProps.task.due_date) : null;
+
 
     const [nameInput, setNameInput] = useState(initialName);
     const [descriptionInput, setDescriptionInput] = useState(initialDescription);
     const [category, setCategory] = useState(initialCategory);
     const [status, setStatus] = useState(initialStatus);
+    const [dueDate, setDueDate] = useState(initialDate);
 
+    let initialDefaultCategoryOption;
+    if (modalType === 'TASK_CREATION') {
+        initialDefaultCategoryOption = <option value={category} key={'default'} disabled>Category</option>
+    }
+
+    const [defaultCategoryOption, setDefaultCategoryOption] = useState(initialDefaultCategoryOption);
 
     const handleChange = (e) => {
         switch (e.target.name) {
@@ -30,6 +40,7 @@ const TaskForm = (props) => {
             case 'taskDescriptionInput':
                 return setDescriptionInput(e.target.value);
             case 'taskCategorySelect':
+                setDefaultCategoryOption(null);
                 return setCategory(e.target.value);
             case 'taskStatusSelect':
                 return setStatus(e.target.value);
@@ -42,6 +53,7 @@ const TaskForm = (props) => {
             name: nameInput,
             description: descriptionInput,
             status: status,
+            due_date: dueDate,
             category_id: category
         };
 
@@ -51,11 +63,31 @@ const TaskForm = (props) => {
             dispatch(createTask(body, matrixId));
         }
 
-        setNameInput('');
-        setDescriptionInput('');
-        setStatus('Unassigned');
         dispatch(closeTaskModal());
     };
+
+    let datePickerContent;
+
+    if (modalType === 'TASK_CREATION') {
+        datePickerContent = <DatePicker
+            id="date-picker"
+            className='form-control'
+            selected={dueDate}
+            onChange={date => setDueDate(date)}
+            dateFormat="MMMM d, yyyy"
+            minDate={new Date()}
+            placeholderText='Due date'
+        />
+    } else {
+        datePickerContent = <DatePicker
+            id="date-picker"
+            className='form-control'
+            selected={dueDate}
+            onChange={date => setDueDate(date)}
+            dateFormat="MMMM d, yyyy"
+            minDate={new Date()}
+        />
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -99,19 +131,28 @@ const TaskForm = (props) => {
                 </select>
             </div>
             <div className="form-group">
-                <select
-                    name="taskCategorySelect"
-                    className="form-control"
-                    id="task-status-field"
-                    onChange={handleChange}
-                    value={category}
-                >
-                    {
-                        categories.map((category) => {
-                            return <option value={category.id} key={category.id}>{category.name}</option>
-                        })
-                    }
-                </select>
+
+                <div className="form-row">
+                    <div className="col">
+                        <select
+                            name="taskCategorySelect"
+                            className="form-control"
+                            id="task-status-field"
+                            onChange={handleChange}
+                            value={category}
+                        >
+                            {defaultCategoryOption}
+                            {
+                                categories.map((category) => {
+                                    return <option value={category.id} key={category.id}>{category.name}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                    <div className='col'>
+                        {datePickerContent}
+                    </div>
+                </div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>

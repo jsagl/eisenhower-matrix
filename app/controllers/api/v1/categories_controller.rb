@@ -1,6 +1,6 @@
 class Api::V1::CategoriesController < ApplicationController
   before_action :set_matrix, only: [:index]
-  before_action :set_category, only: [:udpate, :destroy]
+  before_action :set_category, only: [:update]
 
   def index
     categories = Category.where(matrix: @matrix)
@@ -20,12 +20,6 @@ class Api::V1::CategoriesController < ApplicationController
     render status: :ok, json: @category
   end
 
-  def destroy
-    @category.destroy
-
-    head :no_content
-  end
-
   private
 
   def set_matrix
@@ -37,7 +31,7 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def permitted_params
-    params.permit(:name, :color)
+    params.permit(:name, :color, :matrix_id)
   end
 end
 

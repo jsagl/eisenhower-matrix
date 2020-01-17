@@ -7,9 +7,9 @@ const OPEN_TASK_MODAL = 'OPEN_TASK_MODAL';
 const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 const CREATE_CATEGORY = 'CREATE_CATEGORY';
 const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
-const DELETE_CATEGORY = 'DELETE_CATEGORY';
 const OPEN_CATEGORY_MODAL = 'OPEN_CATEGORY_MODAL';
 const CLOSE_CATEGORY_MODAL = 'CLOSE_CATEGORY_MODAL';
+const DOM_TASK_COLORS_UPDATE = 'DOM_TASK_COLORS_UPDATE';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
@@ -158,27 +158,6 @@ const updateCategory = (matrixId, categoryId, body) => {
     }
 };
 
-const deleteCategory = (matrixId, categoryId) => {
-    const promise = fetch(
-        `/api/v1/matrices/${matrixId}/categories/${categoryId}`,
-        {
-            method: "DELETE",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                'X-CSRF-Token': csrfToken
-            },
-            credentials: 'same-origin'
-        }
-    );
-
-    return {
-        type: DELETE_CATEGORY,
-        payload: promise,
-        categoryId: categoryId
-    }
-};
-
 const closeCategoryModal = () => {
     return {
         type: CLOSE_CATEGORY_MODAL,
@@ -199,6 +178,16 @@ const openCategoryModal = (modalType, modalProps = {title: 'Create category'}) =
     }
 };
 
+const domTaskColorsUpdate = (categoryId, color) => {
+    return {
+        type: DOM_TASK_COLORS_UPDATE,
+        payload: {
+            categoryId: categoryId,
+            color: color
+        }
+    }
+};
+
 
 
 export {
@@ -211,7 +200,7 @@ export {
     fetchCategories, FETCH_CATEGORIES,
     createCategory, CREATE_CATEGORY,
     updateCategory, UPDATE_CATEGORY,
-    deleteCategory, DELETE_CATEGORY,
     openCategoryModal, OPEN_CATEGORY_MODAL,
     closeCategoryModal, CLOSE_CATEGORY_MODAL,
+    domTaskColorsUpdate, DOM_TASK_COLORS_UPDATE
 }

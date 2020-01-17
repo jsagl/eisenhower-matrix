@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
-import {openCategoryModal, updateCategory, deleteCategory} from "../actions";
+import {openCategoryModal} from "../actions";
 
 const Container = styled.div`
   box-shadow: 0px 2px 7px 2px rgba(100, 100, 100, 0.1);
@@ -31,14 +31,7 @@ const Category = (props) => {
 
     const openModal = (e) => {
         if (e.target.tagName !== 'I') {
-            dispatch(openCategoryModal('CATEGORY_UPDATE', {title: 'Update category'}));
-        }
-    };
-
-    const openDeleteConfirmation = () => {
-        console.log(props.category.id);
-        if (window.confirm("Are you sure you wish to delete this category?")){
-            return dispatch(deleteCategory(matrixId, props.category.id));
+            dispatch(openCategoryModal('CATEGORY_UPDATE', {title: 'Update category', category: props.category}));
         }
     };
 
@@ -47,11 +40,6 @@ const Category = (props) => {
             <Container>
                 <ColorMarker color={props.category.color} />
                 <span>{props.category.name}</span>
-                <div
-                    onClick={openDeleteConfirmation}
-                >
-                    <i className="fas fa-times"></i>
-                </div>
             </Container>
         </div>
     );

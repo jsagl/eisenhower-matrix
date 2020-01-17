@@ -1,4 +1,4 @@
-import { FETCH_TASKS, CREATE_TASK, UPDATE_TASK, DELETE_TASK } from '../actions/index'
+import {FETCH_TASKS, CREATE_TASK, UPDATE_TASK, DELETE_TASK, DOM_TASK_COLORS_UPDATE} from '../actions/index'
 
 const tasksReducer = (state, action) => {
     if (state === undefined) {
@@ -27,6 +27,13 @@ const tasksReducer = (state, action) => {
                 if (task.id === action.taskId) {
                     updatedTasksList.splice(i,1);
                     return true
+                }
+            });
+            return updatedTasksList;
+        case DOM_TASK_COLORS_UPDATE:
+            updatedTasksList.find((task, i, updatedTasksList) => {
+                if (task.category_id === action.payload.categoryId) {
+                    updatedTasksList[i].color = action.payload.color;
                 }
             });
             return updatedTasksList;

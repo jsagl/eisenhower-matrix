@@ -18,7 +18,7 @@ const CategoryModal = () => {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <CategoryForm />
+                <CategoryForm/>
             </Modal.Body>
         </Modal>
     );
