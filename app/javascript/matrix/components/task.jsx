@@ -70,7 +70,7 @@ const Task = (props) => {
             onClick={openTaskModal}
         >
             <Container>
-                <ColorMarker color={props.task.category_color} />
+                <ColorMarker color={props.task.color} />
                 <div
                     onClick={setTaskAsDone}
                 >

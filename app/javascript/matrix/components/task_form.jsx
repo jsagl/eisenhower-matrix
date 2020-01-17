@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
@@ -9,16 +9,19 @@ const TaskForm = (props) => {
     const matrixId = useParams().matrix;
     const modalType = useSelector(state => state.taskModal.modalType);
     const modalProps = useSelector(state => state.taskModal.modalProps);
+    const categories = useSelector(state => state.categories);
+    const dispatch = useDispatch();
 
     const initialName = modalType === 'TASK_UPDATE' ? modalProps.task.name : '';
     const initialDescription = modalType === 'TASK_UPDATE' ? modalProps.task.description : '';
+    const initialCategory = modalType === 'TASK_UPDATE' ? modalProps.task.category_id : categories[0].id;
     const initialStatus = modalType === 'TASK_UPDATE' ? modalProps.task.status : positionToNum.toBeAssigned;
 
     const [nameInput, setNameInput] = useState(initialName);
     const [descriptionInput, setDescriptionInput] = useState(initialDescription);
+    const [category, setCategory] = useState(initialCategory);
     const [status, setStatus] = useState(initialStatus);
 
-    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         switch (e.target.name) {
@@ -26,6 +29,8 @@ const TaskForm = (props) => {
                 return setNameInput(e.target.value);
             case 'taskDescriptionInput':
                 return setDescriptionInput(e.target.value);
+            case 'taskCategorySelect':
+                return setCategory(e.target.value);
             case 'taskStatusSelect':
                 return setStatus(e.target.value);
         }
@@ -36,7 +41,8 @@ const TaskForm = (props) => {
         const body = {
             name: nameInput,
             description: descriptionInput,
-            status: status
+            status: status,
+            category_id: category
         };
 
         if (modalType === 'TASK_UPDATE') {
@@ -81,7 +87,7 @@ const TaskForm = (props) => {
                 <select
                     name="taskStatusSelect"
                     className="form-control"
-                    id="task-status-field"
+                    id="task-category-field"
                     onChange={handleChange}
                     value={status}
                 >
@@ -90,6 +96,21 @@ const TaskForm = (props) => {
                     <option value={positionToNum.importantNotUrgent}>Important & Not Urgent</option>
                     <option value={positionToNum.notImportantUrgent}>Not Important & Urgent</option>
                     <option value={positionToNum.notImportantNotUrgent}>Not Important & Not Urgent</option>
+                </select>
+            </div>
+            <div className="form-group">
+                <select
+                    name="taskCategorySelect"
+                    className="form-control"
+                    id="task-status-field"
+                    onChange={handleChange}
+                    value={category}
+                >
+                    {
+                        categories.map((category) => {
+                            return <option value={category.id} key={category.id}>{category.name}</option>
+                        })
+                    }
                 </select>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

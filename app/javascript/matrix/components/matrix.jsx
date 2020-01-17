@@ -10,7 +10,7 @@ import UnassignedTasksBox from "./unassigned_tasks_box";
 import DoneTasksBox from "./doneTasksBox";
 import CreateTaskButton from './create_task_button';
 import TaskModal from './task_modal';
-import {fetchTasks} from "../actions";
+import {fetchCategories, fetchTasks} from "../actions";
 
 const Container = styled.div`
   margin: 50px 100px;
@@ -21,6 +21,7 @@ const Matrix = () => {
     const matrixId = useParams().matrix;
 
     useEffect(()=> {
+        dispatch(fetchCategories(matrixId));
         dispatch(fetchTasks(matrixId));
     }, [dispatch]);
 

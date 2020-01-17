@@ -4,6 +4,7 @@ const UPDATE_TASK = 'UPDATE_TASK';
 const DELETE_TASK = 'DELETE_TASK';
 const CLOSE_MODAL = 'CLOSE_MODAL';
 const OPEN_MODAL = 'OPEN_MODAL';
+const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
@@ -100,11 +101,22 @@ const deleteTask = (matrixId, taskId) => {
     }
 };
 
+const fetchCategories = (matrixId) => {
+    const promise = fetch(`/api/v1/matrices/${matrixId}/categories`, { credentials: 'same-origin' })
+        .then(response => response.json());
+
+    return {
+        type: FETCH_CATEGORIES,
+        payload: promise
+    }
+};
+
 export {
     fetchTasks, FETCH_TASKS,
     createTask, CREATE_TASK,
     updateTask, UPDATE_TASK,
     deleteTask, DELETE_TASK,
     closeModal, CLOSE_MODAL,
-    openModal, OPEN_MODAL
+    openModal, OPEN_MODAL,
+    fetchCategories, FETCH_CATEGORIES
 }

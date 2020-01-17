@@ -3,34 +3,21 @@ class Api::V1::TasksController < ApplicationController
   before_action :set_task, only: [:update, :destroy]
 
   def index
-    tasks = Task.where(matrix: @matrix).includes(:category)
+    tasks = Task.where(matrix: @matrix)
 
-    formatted_tasks = tasks.map do |task|
-      {
-          id: task.id,
-          name: task.name,
-          description: task.description,
-          due_date: task.due_date,
-          status: task.status,
-          created_at: task.created_at,
-          category: task.category.name,
-          category_color: task.category.color
-      }
-    end
-
-    render status: :ok, json: formatted_tasks
+    render status: :ok, json: Api::V1::Presenters::TasksPresenter.call(tasks)
   end
 
   def create
     task = Task.create(formatted_task_params)
 
-    render status: :created, json: task
+    render status: :created, json: Api::V1::Presenters::TaskPresenter.call(task)
   end
 
   def update
     @task.update(permitted_params)
 
-    render status: :ok, json: @task
+    render status: :ok, json: Api::V1::Presenters::TaskPresenter.call(@task)
   end
 
   def destroy
@@ -50,7 +37,7 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def permitted_params
-    params.permit(:name, :description, :due_date, :matrix_id, :status)
+    params.permit(:name, :description, :due_date, :matrix_id, :category_id, :status)
   end
 
   def formatted_task_params
