@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker/es";
 
 import {closeTaskModal, createTask, updateTask} from '../actions/index';
 import { positionToNum } from "./matrix";
+import TaskFormMatrix from "./task_form_matrix";
 
 const TaskForm = (props) => {
     const matrixId = useParams().matrix;
@@ -42,8 +43,8 @@ const TaskForm = (props) => {
             case 'taskCategorySelect':
                 setDefaultCategoryOption(null);
                 return setCategory(e.target.value);
-            case 'taskStatusSelect':
-                return setStatus(e.target.value);
+            // case 'taskStatusSelect':
+            //     return setStatus(e.target.value);
         }
     };
 
@@ -115,21 +116,22 @@ const TaskForm = (props) => {
                     value={descriptionInput}
                 />
             </div>
-            <div className="form-group">
-                <select
-                    name="taskStatusSelect"
-                    className="form-control"
-                    id="task-category-field"
-                    onChange={handleChange}
-                    value={status}
-                >
-                    <option value={positionToNum.toBeAssigned}>Unassigned</option>
-                    <option value={positionToNum.importantUrgent}>Important & Urgent</option>
-                    <option value={positionToNum.importantNotUrgent}>Important & Not Urgent</option>
-                    <option value={positionToNum.notImportantUrgent}>Not Important & Urgent</option>
-                    <option value={positionToNum.notImportantNotUrgent}>Not Important & Not Urgent</option>
-                </select>
-            </div>
+            <TaskFormMatrix setStatus={setStatus}/>
+            {/*<div className="form-group">*/}
+            {/*    <select*/}
+            {/*        name="taskStatusSelect"*/}
+            {/*        className="form-control"*/}
+            {/*        id="task-category-field"*/}
+            {/*        onChange={handleChange}*/}
+            {/*        value={status}*/}
+            {/*    >*/}
+            {/*        <option value={positionToNum.toBeAssigned}>Unassigned</option>*/}
+            {/*        <option value={positionToNum.importantUrgent}>Important & Urgent</option>*/}
+            {/*        <option value={positionToNum.importantNotUrgent}>Important & Not Urgent</option>*/}
+            {/*        <option value={positionToNum.notImportantUrgent}>Not Important & Urgent</option>*/}
+            {/*        <option value={positionToNum.notImportantNotUrgent}>Not Important & Not Urgent</option>*/}
+            {/*    </select>*/}
+            {/*</div>*/}
             <div className="form-group">
 
                 <div className="form-row">

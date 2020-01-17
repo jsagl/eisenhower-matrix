@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import "~react-datepicker/dist/react-datepicker";
 @import './font_faces';
+@import './matrix';
 
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
@@ -10,3 +11,4 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 body {
   font-family: 'Roboto', sans-serif;
 }
+
