@@ -11,6 +11,9 @@ import DoneTasksBox from "./doneTasksBox";
 import CreateTaskButton from './create_task_button';
 import TaskModal from './task_modal';
 import {fetchCategories, fetchTasks} from "../actions";
+import CreateCategoryButton from "./create_category_button";
+import CategoryModal from "./category_modal";
+import CategoryList from "./category_list";
 
 const Container = styled.div`
   margin: 50px 100px;
@@ -29,6 +32,7 @@ const Matrix = () => {
         <DndProvider backend={Backend}>
             <Container className="">
                 <CreateTaskButton/>
+                <CreateCategoryButton/>
                 <div className="row justify-content-center">
                     <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
                 </div>
@@ -43,9 +47,11 @@ const Matrix = () => {
                 </div>
                 <br/>
                 <div className="row justify-content-center">
+                    <CategoryList/>
                     <DoneTasksBox tasksFilter={positionToNum.done}/>
                 </div>
                 <TaskModal/>
+                <CategoryModal/>
             </Container>
         </DndProvider>
     );

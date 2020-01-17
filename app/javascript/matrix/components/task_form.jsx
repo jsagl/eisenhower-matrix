@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
-import {closeModal, createTask, updateTask} from '../actions/index';
+import {closeTaskModal, createTask, updateTask} from '../actions/index';
 import { positionToNum } from "./matrix";
 
 const TaskForm = (props) => {
@@ -54,7 +54,7 @@ const TaskForm = (props) => {
         setNameInput('');
         setDescriptionInput('');
         setStatus('Unassigned');
-        dispatch(closeModal());
+        dispatch(closeTaskModal());
     };
 
     return (

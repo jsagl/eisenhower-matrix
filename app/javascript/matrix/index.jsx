@@ -11,14 +11,15 @@ import Matrix from './components/matrix';
 import tasksReducer from './reducers/tasks_reducer';
 import taskModalReducer from "./reducers/task_modal_reducer";
 import categoriesReducer from "./reducers/categories_reducer";
+import categoryModalReducer from "./reducers/category_modal_reducer";
 
 const middlewares = applyMiddleware(reduxPromise, logger);
 
 const reducers = combineReducers({
     tasks: tasksReducer,
     taskModal: taskModalReducer,
-    categories: categoriesReducer
-
+    categories: categoriesReducer,
+    categoryModal: categoryModalReducer
 });
 
 const initialState = {
@@ -28,6 +29,11 @@ const initialState = {
         display: false,
         modalType: 'TASK_CREATION',
         modalProps: {title: 'Create task'}
+    },
+    categoryModal: {
+        display: false,
+        modalType: 'CATEGORY_CREATION',
+        modalProps: {title: 'Create category'}
     }
 };
 

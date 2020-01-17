@@ -2,9 +2,14 @@ const FETCH_TASKS = 'FETCH_TASKS';
 const CREATE_TASK = 'CREATE_TASK';
 const UPDATE_TASK = 'UPDATE_TASK';
 const DELETE_TASK = 'DELETE_TASK';
-const CLOSE_MODAL = 'CLOSE_MODAL';
-const OPEN_MODAL = 'OPEN_MODAL';
+const CLOSE_TASK_MODAL = 'CLOSE_TASK_MODAL';
+const OPEN_TASK_MODAL = 'OPEN_TASK_MODAL';
 const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+const CREATE_CATEGORY = 'CREATE_CATEGORY';
+const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
+const DELETE_CATEGORY = 'DELETE_CATEGORY';
+const OPEN_CATEGORY_MODAL = 'OPEN_CATEGORY_MODAL';
+const CLOSE_CATEGORY_MODAL = 'CLOSE_CATEGORY_MODAL';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
@@ -39,18 +44,18 @@ const createTask = (body, matrixId) => {
     }
 };
 
-const closeModal = () => {
+const closeTaskModal = () => {
     return {
-        type: CLOSE_MODAL,
+        type: CLOSE_TASK_MODAL,
         payload: {
             display: false,
         }
     }
 };
 
-const openModal = (modalType, modalProps = {title: 'Create task'}) => {
+const openTaskModal = (modalType, modalProps = {title: 'Create task'}) => {
     return {
-        type: OPEN_MODAL,
+        type: OPEN_TASK_MODAL,
         payload: {
             display: true,
             modalType: modalType,
@@ -111,12 +116,102 @@ const fetchCategories = (matrixId) => {
     }
 };
 
+const createCategory = (body, matrixId) => {
+    const promise = fetch(
+        `/api/v1/matrices/${matrixId}/categories`,
+        {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                'X-CSRF-Token': csrfToken
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(body),
+        }
+    ).then(response => response.json());
+
+    return {
+        type: CREATE_CATEGORY,
+        payload: promise
+    }
+};
+
+const updateCategory = (matrixId, categoryId, body) => {
+    const promise = fetch(
+        `/api/v1/matrices/${matrixId}/categories/${categoryId}`,
+        {
+            method: "PATCH",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                'X-CSRF-Token': csrfToken
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(body),
+        }
+    ).then(response => response.json());
+
+    return {
+        type: UPDATE_CATEGORY,
+        payload: promise
+    }
+};
+
+const deleteCategory = (matrixId, categoryId) => {
+    const promise = fetch(
+        `/api/v1/matrices/${matrixId}/categories/${categoryId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                'X-CSRF-Token': csrfToken
+            },
+            credentials: 'same-origin'
+        }
+    );
+
+    return {
+        type: DELETE_CATEGORY,
+        payload: promise,
+        categoryId: categoryId
+    }
+};
+
+const closeCategoryModal = () => {
+    return {
+        type: CLOSE_CATEGORY_MODAL,
+        payload: {
+            display: false,
+        }
+    }
+};
+
+const openCategoryModal = (modalType, modalProps = {title: 'Create category'}) => {
+    return {
+        type: OPEN_CATEGORY_MODAL,
+        payload: {
+            display: true,
+            modalType: modalType,
+            modalProps: modalProps
+        }
+    }
+};
+
+
+
 export {
     fetchTasks, FETCH_TASKS,
     createTask, CREATE_TASK,
     updateTask, UPDATE_TASK,
     deleteTask, DELETE_TASK,
-    closeModal, CLOSE_MODAL,
-    openModal, OPEN_MODAL,
-    fetchCategories, FETCH_CATEGORIES
+    closeTaskModal, CLOSE_TASK_MODAL,
+    openTaskModal, OPEN_TASK_MODAL,
+    fetchCategories, FETCH_CATEGORIES,
+    createCategory, CREATE_CATEGORY,
+    updateCategory, UPDATE_CATEGORY,
+    deleteCategory, DELETE_CATEGORY,
+    openCategoryModal, OPEN_CATEGORY_MODAL,
+    closeCategoryModal, CLOSE_CATEGORY_MODAL,
 }

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useDrag } from 'react-dnd'
 
-import {openModal, updateTask, deleteTask} from "../actions";
+import {openTaskModal, updateTask, deleteTask} from "../actions";
 import { positionToNum } from "./matrix";
 
 const Container = styled.div`
@@ -43,9 +43,9 @@ const Task = (props) => {
         }),
     });
 
-    const openTaskModal = (e) => {
+    const openModal = (e) => {
         if (e.target.tagName !== 'I') {
-            dispatch(openModal('TASK_UPDATE', {task: props.task, title: 'Update task'}));
+            dispatch(openTaskModal('TASK_UPDATE', {task: props.task, title: 'Update task'}));
         }
     };
 
@@ -67,7 +67,7 @@ const Task = (props) => {
             style={{
                 opacity: isDragging ? 0.5 : 1,
             }}
-            onClick={openTaskModal}
+            onClick={openModal}
         >
             <Container>
                 <ColorMarker color={props.task.color} />

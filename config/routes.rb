@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :matrices do
         resources :tasks, only: [:index, :create, :update, :destroy]
-        resources :categories, only: [:index]
+        resources :categories, only: [:index, :create, :update, :destroy]
       end
     end
   end

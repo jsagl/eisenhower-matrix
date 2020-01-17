@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 
-import {closeTaskModal} from "../actions";
-import TaskForm from "./task_form";
+import {closeCategoryModal} from "../actions";
+import CategoryForm from "./category_form";
 
-const TaskModal = () => {
-    const show = useSelector(state => state.taskModal.display);
-    const title = useSelector(state => state.taskModal.modalProps.title);
+const CategoryModal = () => {
+    const show = useSelector(state => state.categoryModal.display);
+    const title = useSelector(state => state.categoryModal.modalProps.title);
     const dispatch = useDispatch();
 
-    const handleClose = () => dispatch(closeTaskModal());
+    const handleClose = () => dispatch(closeCategoryModal());
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -18,10 +18,10 @@ const TaskModal = () => {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <TaskForm />
+                <CategoryForm />
             </Modal.Body>
         </Modal>
     );
 };
 
-export default TaskModal;
+export default CategoryModal;
