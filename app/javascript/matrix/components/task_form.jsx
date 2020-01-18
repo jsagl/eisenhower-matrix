@@ -114,7 +114,7 @@ const TaskForm = (props) => {
                     value={descriptionInput}
                 />
             </div>
-            <TaskFormMatrix setStatus={setStatus}/>
+            <TaskFormMatrix setStatus={setStatus} taskStatus={status}/>
             <div className="form-group">
 
                 <div className="form-row">

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {positionToNum} from "./matrix";
+
+import TaskFormQuadrant from "./task_form_quadrant";
 
 const Container = styled.div`
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
@@ -16,45 +18,16 @@ const Row = styled.div`
   margin: 0;
 `;
 
-const Quadrant = styled.div`
-  //border: 1px solid black;
-  //background-color: white;
-  width: 100%;
-  padding: 0px;
-  div {
-    margin: 3px;
-    cursor: pointer;
-  }
-`;
-
 const TaskFormMatrix = (props) => {
-    const handleClick = (e) => {
-      document.querySelectorAll('.form-matrix-quadrant').forEach((quadrant) => {
-         quadrant.classList.remove('selected-quadrant');
-      });
-
-      e.target.classList.toggle('selected-quadrant');
-      props.setStatus(e.target.dataset.status)
-
-    };
-
     return (
         <Container>
             <Row className="row">
-                <Quadrant className="col-6">
-                    <div className='card form-matrix-quadrant' onClick={handleClick} data-status={positionToNum.importantUrgent}>Important & Urgent</div>
-                </Quadrant>
-                <Quadrant className="col-6">
-                    <div className='card form-matrix-quadrant' onClick={handleClick} data-status={positionToNum.importantNotUrgent}>Important & Not Urgent</div>
-                </Quadrant>
+                <TaskFormQuadrant content={'Important & Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.importantUrgent}/>
+                <TaskFormQuadrant content={'Important & Not Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.importantNotUrgent}/>
             </Row>
             <Row className="row">
-                <Quadrant className="col-6">
-                    <div className='card form-matrix-quadrant' onClick={handleClick} data-status={positionToNum.notImportantUrgent}>Not Important & Urgent</div>
-                </Quadrant>
-                <Quadrant className="col-6">
-                    <div className='card form-matrix-quadrant' onClick={handleClick} data-status={positionToNum.notImportantNotUrgent}>Not Important & Not Urgent</div>
-                </Quadrant>
+                <TaskFormQuadrant content={'Not Important & Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.notImportantUrgent}/>
+                <TaskFormQuadrant content={'Not Important & Not Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.notImportantNotUrgent}/>
             </Row>
         </Container>
     );

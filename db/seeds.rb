@@ -27,10 +27,14 @@ categories1 = Category.all.where(matrix_id: matrix1.id)
 categories2 = Category.all.where(matrix_id: matrix2.id)
 
 12.times do
-  Task.create(matrix: matrix1, category: categories1.sample, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: (0..5).to_a.sample, due_date: Date.today + (1..30).to_a.sample.days)
+  Task.create(matrix: matrix1, category: categories1.sample, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: (0..5).to_a.sample, due_date: Date.today + (1..30).to_a.sample.days,
+    time_to_complete: [15, 30, 60, 120, 180].sample
+  )
 end
 
 12.times do
-  Task.create(matrix: matrix2, category: categories2.sample, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: (0..5).to_a.sample, due_date: Date.today + (1..30).to_a.sample.days)
+  Task.create(matrix: matrix2, category: categories2.sample, name: Faker::Book.title, description: Faker::Books::Dune.quote, status: (0..5).to_a.sample, due_date: Date.today + (1..30).to_a.sample.days,
+    time_to_complete: [15, 30, 60, 120, 180].sample
+  )
 end
 
