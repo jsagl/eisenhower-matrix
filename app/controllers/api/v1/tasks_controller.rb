@@ -37,7 +37,7 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def permitted_params
-    params.permit(:name, :description, :due_date, :matrix_id, :category_id, :status)
+    params.permit(:name, :description, :due_date, :time_to_complete, :matrix_id, :category_id, :status)
   end
 
   def formatted_task_params

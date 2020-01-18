@@ -5,9 +5,10 @@ class Api::V1::ParamsFormatters::TaskParamsFormatter
           name: params[:name],
           description: params[:description],
           status: params[:status],
+          due_date: format_date(params[:due_date]),
+          time_to_complete: params[:time_to_complete],
           matrix_id: params[:matrix_id],
-          category_id: params[:category_id],
-          due_date: format_date(params[:due_date])
+          category_id: params[:category_id]
       }
     end
 

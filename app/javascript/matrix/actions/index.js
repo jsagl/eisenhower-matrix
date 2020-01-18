@@ -13,6 +13,11 @@ const DOM_TASK_COLORS_UPDATE = 'DOM_TASK_COLORS_UPDATE';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
+const handleError = () => {
+    alert("Sorry, an error occurred. The page is going to be refreshed.");
+    document.location.reload()
+};
+
 const fetchTasks = (matrixId) => {
     const promise = fetch(`/api/v1/matrices/${matrixId}/tasks`, { credentials: 'same-origin' })
         .then(response => response.json());
@@ -36,7 +41,9 @@ const createTask = (body, matrixId) => {
             credentials: 'same-origin',
             body: JSON.stringify(body),
         }
-    ).then(response => response.json());
+    )
+        .then(response => response.json())
+        .catch(handleError);
 
     return {
         type: CREATE_TASK,
@@ -77,7 +84,8 @@ const updateTask = (matrixId, taskId, body) => {
             credentials: 'same-origin',
             body: JSON.stringify(body),
         }
-    ).then(response => response.json());
+    ).then(response => response.json())
+     .catch(handleError);
 
     return {
         type: UPDATE_TASK,
@@ -97,7 +105,7 @@ const deleteTask = (matrixId, taskId) => {
             },
             credentials: 'same-origin'
         }
-    );
+    ).catch(handleError);
 
     return {
         type: DELETE_TASK,
@@ -108,7 +116,8 @@ const deleteTask = (matrixId, taskId) => {
 
 const fetchCategories = (matrixId) => {
     const promise = fetch(`/api/v1/matrices/${matrixId}/categories`, { credentials: 'same-origin' })
-        .then(response => response.json());
+        .then(response => response.json())
+        .catch(handleError);
 
     return {
         type: FETCH_CATEGORIES,
@@ -129,7 +138,8 @@ const createCategory = (body, matrixId) => {
             credentials: 'same-origin',
             body: JSON.stringify(body),
         }
-    ).then(response => response.json());
+    ).then(response => response.json())
+    .catch(handleError);
 
     return {
         type: CREATE_CATEGORY,
@@ -150,7 +160,8 @@ const updateCategory = (matrixId, categoryId, body) => {
             credentials: 'same-origin',
             body: JSON.stringify(body),
         }
-    ).then(response => response.json());
+    ).then(response => response.json())
+    .catch(handleError);
 
     return {
         type: UPDATE_CATEGORY,

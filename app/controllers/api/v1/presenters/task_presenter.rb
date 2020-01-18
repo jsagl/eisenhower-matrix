@@ -9,6 +9,7 @@ class Api::V1::Presenters::TaskPresenter
           status: task.status,
           description: task.description,
           due_date: task.due_date,
+          time_to_complete: task.time_to_complete,
           created_at: task.created_at,
           updated_at: task.updated_at,
           matrix_id: task.matrix_id,

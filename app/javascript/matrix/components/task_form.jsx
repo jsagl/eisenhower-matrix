@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker/es";
 import {closeTaskModal, createTask, updateTask} from '../actions/index';
 import { positionToNum } from "./matrix";
 import TaskFormMatrix from "./task_form_matrix";
+import TaskFormRadioButton from "./task_form_radio_btn_list";
 
 const TaskForm = (props) => {
     const matrixId = useParams().matrix;
@@ -18,6 +19,7 @@ const TaskForm = (props) => {
     const initialDescription = modalType === 'TASK_UPDATE' ? modalProps.task.description : '';
     const initialCategory = modalType === 'TASK_UPDATE' ? modalProps.task.category_id : categories[0].id;
     const initialStatus = modalType === 'TASK_UPDATE' ? modalProps.task.status : positionToNum.toBeAssigned;
+    const initialTimeToComplete = modalType === 'TASK_UPDATE' ? modalProps.task.time_to_complete : 15;
     const initialDate = modalType === 'TASK_UPDATE' ? new Date(modalProps.task.due_date) : null;
 
 
@@ -25,6 +27,7 @@ const TaskForm = (props) => {
     const [descriptionInput, setDescriptionInput] = useState(initialDescription);
     const [category, setCategory] = useState(initialCategory);
     const [status, setStatus] = useState(initialStatus);
+    const [timeToComplete, setTimeToComplete] = useState(initialTimeToComplete);
     const [dueDate, setDueDate] = useState(initialDate);
 
     let initialDefaultCategoryOption;
@@ -53,6 +56,7 @@ const TaskForm = (props) => {
             description: descriptionInput,
             status: status,
             due_date: dueDate,
+            time_to_complete: timeToComplete,
             category_id: category
         };
 
@@ -114,9 +118,23 @@ const TaskForm = (props) => {
                     value={descriptionInput}
                 />
             </div>
-            <TaskFormMatrix setStatus={setStatus} taskStatus={status}/>
-            <div className="form-group">
 
+            <div className="form-group">
+                <TaskFormMatrix setStatus={setStatus} taskStatus={status}/>
+            </div>
+
+            <div className="form-group">
+                <div className="form-check form-check-inline">
+                    <label className="form-check-label">Duration:</label>
+                </div>
+                <TaskFormRadioButton value={15} timeToComplete={timeToComplete} setTimeToComplete={setTimeToComplete}/>
+                <TaskFormRadioButton value={30} timeToComplete={timeToComplete} setTimeToComplete={setTimeToComplete}/>
+                <TaskFormRadioButton value={60} timeToComplete={timeToComplete} setTimeToComplete={setTimeToComplete}/>
+                <TaskFormRadioButton value={120} timeToComplete={timeToComplete} setTimeToComplete={setTimeToComplete}/>
+                <TaskFormRadioButton value={180} timeToComplete={timeToComplete} setTimeToComplete={setTimeToComplete}/>
+            </div>
+
+            <div className="form-group">
                 <div className="form-row">
                     <div className="col">
                         <select
