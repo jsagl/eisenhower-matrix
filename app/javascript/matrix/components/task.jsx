@@ -15,16 +15,44 @@ const Container = styled.div`
   border-radius: 3px;
   background-color: white;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
 `;
 
 const ColorMarker = styled.div`
-  width: 8px;
-  height: 20px;
+  min-width: 8px;
+  min-height: 20px;
   margin-right: 10px;
   background-color: ${props => props.color};
+  border-radius: 10px;
+`;
+
+const Checkbox = styled.div`
+  color: #dadada;
+  margin-right: 10px;
+`;
+
+const DeleteCross = styled.div`
+  color: #e3e3e3;
+`;
+
+const Content = styled.div`
+  padding: 0;
+  margin: 0 0 0 42px;
+  line-height: 1;
+  position: absolute;
+  display: inline-block;
+  max-width: calc(60% - 42px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+const LeftSubContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
 const Task = (props) => {
@@ -70,18 +98,20 @@ const Task = (props) => {
             onClick={openModal}
         >
             <Container>
-                <ColorMarker color={props.task.color} />
-                <div
-                    onClick={setTaskAsDone}
-                >
-                    <i className={checkboxClass}/>
-                </div>
-                <span>{props.task.name}</span>
-                <div
+                <LeftSubContainer>
+                    <ColorMarker color={props.task.color} />
+                    <Checkbox
+                        onClick={setTaskAsDone}
+                    >
+                        <i className={checkboxClass}/>
+                    </Checkbox>
+                    <Content>{props.task.name}</Content>
+                </LeftSubContainer>
+                <DeleteCross
                     onClick={openDeleteConfirmation}
                 >
                     <i className="fas fa-times"></i>
-                </div>
+                </DeleteCross>
             </Container>
         </div>
     );
