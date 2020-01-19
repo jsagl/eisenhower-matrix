@@ -3,17 +3,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from "react-dnd";
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import SimpleBar from 'simplebar-react';
 
 import Task from './task'
 import { updateTask } from "../actions";
 
-const Card = styled.div`
+const Container = styled.div`
+  .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+    background-color: #cacaca; 
+}
+`;
+
+const Card = styled(SimpleBar)`
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   padding: 1px 0;
   margin: 15px 0;
   height: 25vh;
   border-radius: 3px;
-  background-color: rgba(250, 250, 250, 1)
+  background-color: rgba(250, 250, 250, 1);
+  //overflow-y: auto;
 `;
 
 const Quadrant = (props) => {
@@ -36,7 +44,7 @@ const Quadrant = (props) => {
     };
 
     return (
-        <div
+        <Container
             className="col-6"
             ref={drop}
         >
@@ -47,7 +55,7 @@ const Quadrant = (props) => {
                     })
                 }
             </Card>
-        </div>
+        </Container>
     );
 };
 

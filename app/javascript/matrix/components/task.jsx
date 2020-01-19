@@ -39,14 +39,18 @@ const DeleteCross = styled.div`
 
 const Content = styled.div`
   padding: 0;
-  margin: 0 0 0 42px;
+  margin: 0 0 0 0;
   line-height: 1;
-  position: absolute;
+  position: relative;
   display: inline-block;
-  max-width: calc(60% - 42px);
+  max-width: 300px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  
+  @media (max-width: 1300px) {
+    max-width: 150px;
+  }
 `;
 
 const LeftSubContainer = styled.div`
@@ -54,6 +58,46 @@ const LeftSubContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
 `;
+
+const RightSubContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const DueDate = styled.div`
+  background-color: ${props => props.backgroundColor};
+  color: ${props => props.fontColor};
+  min-width: 62px;
+  text-align: center;
+  font-size: 13px;
+  border-radius: 3px;
+  padding: 1px 7px;
+  margin-right: 10px;
+`;
+
+const Duration = styled.div`
+  color: #b7b7b7 ;
+  font-size: 13px;
+  border-radius: 3px;
+  padding: 1px 7px;
+  margin-right: 12px;
+`;
+
+const months = [
+    'Jan.',
+    'Feb.',
+    'Mar.',
+    'Apr.',
+    'May',
+    'Jun.',
+    'Jul.',
+    'Aug.',
+    'Sep.',
+    'Oct.',
+    'Nov.',
+    'Dec.'
+];
 
 const Task = (props) => {
     const matrixId = useParams().matrix;
@@ -89,6 +133,54 @@ const Task = (props) => {
         }
     };
 
+    const formatTimeToComplete = (min) => {
+        switch (min) {
+            case 30:
+                return '<30min';
+            case 60:
+                return '<1h';
+            case 120:
+                return '<2h';
+            case 180:
+                return '2h+';
+            default:
+                return '<15min';
+        }
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const month = months[date.getMonth()];
+        const day = date.getDate();
+
+        const formattedDate = `${month} ${day}`
+
+        if ((date - new Date()) < 0) {
+            return 'Overdue'
+        } else {
+            return `${month} ${day}`
+        }
+    };
+
+    const getColors = (dateString) => {
+        const date = new Date(dateString);
+        const remainingDays = Math.floor((date - new Date()) / 1000 / 60 / 60 / 24)
+        let backgroundColor;
+        let fontColor;
+
+        if (remainingDays <= 1) {
+            backgroundColor = '#FFD6D4';
+            fontColor = '#FF6961';
+        } else if (remainingDays > 1 && remainingDays <= 7) {
+            backgroundColor = '#FFE5B4';
+            fontColor = '#FF7F00';
+        } else {
+            backgroundColor = '#D6FFD6';
+            fontColor = '#47B747';
+        }
+        return [backgroundColor, fontColor]
+    };
+
     return (
         <div
             ref={drag}
@@ -107,11 +199,26 @@ const Task = (props) => {
                     </Checkbox>
                     <Content>{props.task.name}</Content>
                 </LeftSubContainer>
-                <DeleteCross
-                    onClick={openDeleteConfirmation}
-                >
-                    <i className="fas fa-times"></i>
-                </DeleteCross>
+
+                <RightSubContainer>
+                    <Duration>
+                        {formatTimeToComplete(props.task.time_to_complete)}
+                        <i className="fas fa-stopwatch ml-1"></i>
+                    </Duration>
+                    <DueDate
+                        backgroundColor={getColors(props.task.due_date)[0]}
+                        fontColor={getColors(props.task.due_date)[1]}
+                    >
+                        {/*<i className="far fa-calendar mr-1"></i>*/}
+                        {formatDate(props.task.due_date)}
+                    </DueDate>
+                    <DeleteCross
+                        onClick={openDeleteConfirmation}
+                    >
+                        <i className="fas fa-times"></i>
+                    </DeleteCross>
+
+                </RightSubContainer>
             </Container>
         </div>
     );
