@@ -5,11 +5,9 @@ import {positionToNum} from "./matrix";
 import TaskFormQuadrant from "./task_form_quadrant";
 
 const Container = styled.div`
-  box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   padding: 2px;
   width: 100%;
   border-radius: 3px;
-  background-color: rgba(250, 250, 250, 1)
 `;
 
 const Row = styled.div`

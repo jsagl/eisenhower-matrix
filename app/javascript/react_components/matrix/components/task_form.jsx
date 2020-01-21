@@ -50,11 +50,13 @@ const TaskForm = (props) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        console.log(dueDate);
+
         const body = {
             name: nameInput,
             description: descriptionInput,
             status: status,
-            due_date: dueDate,
+            due_date: new Date(dueDate.getTime() + 720*60000),
             time_to_complete: timeToComplete,
             category_id: category
         };
@@ -133,7 +135,9 @@ const TaskForm = (props) => {
                             id="date-picker"
                             className='form-control'
                             selected={dueDate}
-                            onChange={date => setDueDate(date)}
+                            onChange={date => {
+                                setDueDate(date);
+                            }}
                             dateFormat="MMMM d, yyyy"
                             minDate={new Date()}
                             placeholderText={dueDate == null ? 'Due date' : dueDate}

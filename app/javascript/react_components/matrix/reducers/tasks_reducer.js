@@ -12,6 +12,9 @@ const tasksReducer = (state, action) => {
             return action.payload;
         case CREATE_TASK:
             updatedTasksList.push(action.payload);
+            updatedTasksList.sort((a, b) => {
+                return new Date(a.due_date) - new Date(b.due_date)
+            });
             return updatedTasksList;
         case UPDATE_TASK:
             const updatedTask = action.payload
@@ -21,6 +24,9 @@ const tasksReducer = (state, action) => {
                    return true
                }
             });
+            updatedTasksList.sort((a, b) => {
+                return new Date(a.due_date) - new Date(b.due_date)
+            });
             return updatedTasksList;
         case DELETE_TASK:
             updatedTasksList.find((task, i, updatedTasksList) => {
@@ -28,6 +34,9 @@ const tasksReducer = (state, action) => {
                     updatedTasksList.splice(i,1);
                     return true
                 }
+            });
+            updatedTasksList.sort((a, b) => {
+                return new Date(a.due_date) - new Date(b.due_date)
             });
             return updatedTasksList;
         case DOM_TASK_COLORS_UPDATE:
