@@ -1,1 +1,1 @@
-import '../matrix'
+import '../react_components/matrix'
