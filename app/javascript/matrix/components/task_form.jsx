@@ -20,8 +20,7 @@ const TaskForm = (props) => {
     const initialCategory = modalType === 'TASK_UPDATE' ? modalProps.task.category_id : categories[0].id;
     const initialStatus = modalType === 'TASK_UPDATE' ? modalProps.task.status : positionToNum.toBeAssigned;
     const initialTimeToComplete = modalType === 'TASK_UPDATE' ? modalProps.task.time_to_complete : 15;
-    const initialDate = modalType === 'TASK_UPDATE' ? new Date(modalProps.task.due_date) : null;
-
+    const initialDate = (modalType === 'TASK_UPDATE') && (modalProps.task.due_date != null) ? new Date(modalProps.task.due_date) : null;
 
     const [nameInput, setNameInput] = useState(initialName);
     const [descriptionInput, setDescriptionInput] = useState(initialDescription);
@@ -68,29 +67,6 @@ const TaskForm = (props) => {
 
         dispatch(closeTaskModal());
     };
-
-    let datePickerContent;
-
-    if (modalType === 'TASK_CREATION') {
-        datePickerContent = <DatePicker
-            id="date-picker"
-            className='form-control'
-            selected={dueDate}
-            onChange={date => setDueDate(date)}
-            dateFormat="MMMM d, yyyy"
-            minDate={new Date()}
-            placeholderText='Due date'
-        />
-    } else {
-        datePickerContent = <DatePicker
-            id="date-picker"
-            className='form-control'
-            selected={dueDate}
-            onChange={date => setDueDate(date)}
-            dateFormat="MMMM d, yyyy"
-            minDate={new Date()}
-        />
-    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -153,7 +129,15 @@ const TaskForm = (props) => {
                         </select>
                     </div>
                     <div className='col'>
-                        {datePickerContent}
+                        <DatePicker
+                            id="date-picker"
+                            className='form-control'
+                            selected={dueDate}
+                            onChange={date => setDueDate(date)}
+                            dateFormat="MMMM d, yyyy"
+                            minDate={new Date()}
+                            placeholderText={dueDate == null ? 'Due date' : dueDate}
+                        />
                     </div>
                 </div>
             </div>

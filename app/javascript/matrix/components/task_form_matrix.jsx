@@ -22,12 +22,12 @@ const TaskFormMatrix = (props) => {
     return (
         <Container>
             <Row className="row">
-                <TaskFormQuadrant content={'Important & Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.importantUrgent}/>
-                <TaskFormQuadrant content={'Important & Not Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.importantNotUrgent}/>
+                <TaskFormQuadrant content={'Do'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.importantUrgent}/>
+                <TaskFormQuadrant content={'Decide'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.importantNotUrgent}/>
             </Row>
             <Row className="row">
-                <TaskFormQuadrant content={'Not Important & Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.notImportantUrgent}/>
-                <TaskFormQuadrant content={'Not Important & Not Urgent'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.notImportantNotUrgent}/>
+                <TaskFormQuadrant content={'Delegate'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.notImportantUrgent}/>
+                <TaskFormQuadrant content={'Delete'} setStatus={props.setStatus}  taskStatus={props.taskStatus} quadrantStatus={positionToNum.notImportantNotUrgent}/>
             </Row>
         </Container>
     );

@@ -15,7 +15,7 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def update
-    @task.update(permitted_params)
+    @task.update(formatted_task_params)
 
     render status: :ok, json: Api::V1::Presenters::TaskPresenter.call(@task)
   end

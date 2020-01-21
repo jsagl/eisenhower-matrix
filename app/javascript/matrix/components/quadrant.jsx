@@ -14,14 +14,38 @@ const Container = styled.div`
 }
 `;
 
+const TopQuadrantLegend = styled.div`
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d1d1d1;
+  font-weight: bold;
+`;
+
+const LeftQuadrantLegend = styled.div`
+  position: absolute;
+  left: ${props => props.translateValue};
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  color: #d1d1d1;
+  font-weight: bold;
+`;
+
 const Card = styled(SimpleBar)`
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   padding: 1px 0;
   margin: 15px 0;
-  height: 25vh;
+  height: 30vh;
   border-radius: 3px;
   background-color: rgba(250, 250, 250, 1);
-  //overflow-y: auto;
+`;
+
+const Title = styled.div`
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 5px;
+  line-height: 1;
 `;
 
 const Quadrant = (props) => {
@@ -43,12 +67,17 @@ const Quadrant = (props) => {
         }
     };
 
+    const translateValue = props.topLegend === '' ? '-68px' : '-50px';
+
     return (
         <Container
             className="col-6"
             ref={drop}
         >
+            <TopQuadrantLegend>{props.topLegend}</TopQuadrantLegend>
+            <LeftQuadrantLegend translateValue={translateValue}>{props.leftLegend}</LeftQuadrantLegend>
             <Card>
+                <Title>{props.title}</Title>
                 {
                     tasks.map((task) => {
                        return  <Task task={task} key={task.id} />

@@ -38,15 +38,15 @@ const Matrix = () => {
                 </div>
                 <br/>
                 <div className="row justify-content-center">
-                    <Quadrant tasksFilter={positionToNum.importantUrgent}/>
-                    <Quadrant tasksFilter={positionToNum.importantNotUrgent}/>
+                    <Quadrant title={'DO'} topLegend={'URGENT'} leftLegend={'IMPORTANT'} tasksFilter={positionToNum.importantUrgent}/>
+                    <Quadrant title={'DECIDE'} topLegend={'NOT URGENT'} leftLegend={''} tasksFilter={positionToNum.importantNotUrgent}/>
                 </div>
                 <div className="row justify-content-center">
-                    <Quadrant tasksFilter={positionToNum.notImportantUrgent}/>
-                    <Quadrant tasksFilter={positionToNum.notImportantNotUrgent}/>
+                    <Quadrant title={'DELEGATE'} topLegend={''} leftLegend={'NOT IMPORTANT'} tasksFilter={positionToNum.notImportantUrgent}/>
+                    <Quadrant title={'DELETE'} topLegend={''} leftLegend={''} tasksFilter={positionToNum.notImportantNotUrgent}/>
                 </div>
                 <br/>
-                <div className="row justify-content-center">
+                <div className="row justify-content-start">
                     <CategoryList/>
                     <DoneTasksBox tasksFilter={positionToNum.done}/>
                 </div>

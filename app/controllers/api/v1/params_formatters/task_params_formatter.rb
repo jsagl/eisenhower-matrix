@@ -9,11 +9,11 @@ class Api::V1::ParamsFormatters::TaskParamsFormatter
           time_to_complete: params[:time_to_complete],
           matrix_id: params[:matrix_id],
           category_id: params[:category_id]
-      }
+      }.compact
     end
 
     def format_date(date)
-      date ? Date.parse(date) : Date.today
+      date ? Date.parse(date) : nil
     end
   end
 end

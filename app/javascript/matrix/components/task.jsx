@@ -18,6 +18,10 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.005);
+  }
 `;
 
 const ColorMarker = styled.div`
@@ -47,6 +51,7 @@ const Content = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-decoration: ${props => props.strikethrough};
   
   @media (max-width: 1300px) {
     max-width: 150px;
@@ -74,6 +79,7 @@ const DueDate = styled.div`
   border-radius: 3px;
   padding: 1px 7px;
   margin-right: 10px;
+  visibility: ${props => props.visibility};
 `;
 
 const Duration = styled.div`
@@ -82,6 +88,9 @@ const Duration = styled.div`
   border-radius: 3px;
   padding: 1px 7px;
   margin-right: 12px;
+  min-width: 72.5px;
+  text-align: right;
+  visibility: ${props => props.visibility};
 `;
 
 const months = [
@@ -149,6 +158,7 @@ const Task = (props) => {
     };
 
     const formatDate = (dateString) => {
+
         const date = new Date(dateString);
         const month = months[date.getMonth()];
         const day = date.getDate();
@@ -163,8 +173,10 @@ const Task = (props) => {
     };
 
     const getColors = (dateString) => {
+        if (dateString == null || dateString === '') { return ['white', 'white'] }
+
         const date = new Date(dateString);
-        const remainingDays = Math.floor((date - new Date()) / 1000 / 60 / 60 / 24)
+        const remainingDays = Math.floor((date - new Date()) / 1000 / 60 / 60 / 24);
         let backgroundColor;
         let fontColor;
 
@@ -180,6 +192,9 @@ const Task = (props) => {
         }
         return [backgroundColor, fontColor]
     };
+
+
+    const extraInfoVisibility = props.task.status === 5 ? 'hidden' : 'visible'
 
     return (
         <div
@@ -197,19 +212,23 @@ const Task = (props) => {
                     >
                         <i className={checkboxClass}/>
                     </Checkbox>
-                    <Content>{props.task.name}</Content>
+                    <Content strikethrough={props.task.status === 5 ? 'line-through' : 'none'}>
+                        {props.task.name}
+                    </Content>
                 </LeftSubContainer>
 
                 <RightSubContainer>
-                    <Duration>
+                    <Duration
+                        visibility={extraInfoVisibility}
+                    >
                         {formatTimeToComplete(props.task.time_to_complete)}
                         <i className="fas fa-stopwatch ml-1"></i>
                     </Duration>
                     <DueDate
+                        visibility={extraInfoVisibility}
                         backgroundColor={getColors(props.task.due_date)[0]}
                         fontColor={getColors(props.task.due_date)[1]}
                     >
-                        {/*<i className="far fa-calendar mr-1"></i>*/}
                         {formatDate(props.task.due_date)}
                     </DueDate>
                     <DeleteCross
