@@ -59,17 +59,20 @@ const CategoryForm = (props) => {
                     value={nameInput}
                 />
             </div>
-            <div className="form-group">
-                <input
-                    type="color"
-                    className="form-control"
-                    id="category-color-field"
-                    key="category-color-field"
-                    name="categoryColorInput"
-                    placeholder="Category color #00000"
-                    onChange={handleChange}
-                    value={color}
-                />
+            <div className="form-group row">
+                <div className='col-3'>
+                    <input
+                        type="color"
+                        className="form-control"
+                        id="category-color-field"
+                        key="category-color-field"
+                        name="categoryColorInput"
+                        placeholder="Category color #00000"
+                        onChange={handleChange}
+                        value={color}
+                    />
+                </div>
+                <label htmlFor="category-color-field" className="col-form-label">Category color</label>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>

@@ -6,12 +6,9 @@ import { useDispatch } from "react-redux";
 import {openCategoryModal} from "../actions";
 
 const Container = styled.div`
-  box-shadow: 0px 2px 7px 2px rgba(100, 100, 100, 0.1);
-  padding: 0px 5px;
   margin: 5px;
   height: 30px;
   border-radius: 3px;
-  background-color: white;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -25,14 +22,22 @@ const ColorMarker = styled.div`
   background-color: ${props => props.color};
 `;
 
+const UpdatePen = styled.div`
+  margin-left: 10px;
+  font-size: 14px;
+  color: #e3e3e3;
+  transition: all .1s linear;
+  &:hover {
+    color: #b4b4b4;
+  }
+`;
+
 const Category = (props) => {
     const matrixId = useParams().matrix;
     const dispatch = useDispatch();
 
     const openModal = (e) => {
-        if (e.target.tagName !== 'I') {
-            dispatch(openCategoryModal('CATEGORY_UPDATE', {title: 'Update category', category: props.category}));
-        }
+        dispatch(openCategoryModal('CATEGORY_UPDATE', {title: 'Update category', category: props.category}));
     };
 
     return (
@@ -40,6 +45,9 @@ const Category = (props) => {
             <Container>
                 <ColorMarker color={props.category.color} />
                 <span>{props.category.name}</span>
+                <UpdatePen>
+                    <i className="fas fa-pen"></i>
+                </UpdatePen>
             </Container>
         </div>
     );

@@ -14,14 +14,18 @@ const Container = styled.div`
   }
 `;
 
-const Card = styled(SimpleBar)`
+const Card = styled.div`
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   padding: 1px 0;
   margin: 15px 0;
-  max-height: 10vh;
   border-radius: 3px;
   background-color: rgba(250, 250, 250, 1);
   display: ${props => props.display}
+`;
+
+const TasksContainer = styled(SimpleBar)`
+  max-height: 10vh;
+  margin: 5px 0;
 `;
 
 const Title = styled.div`
@@ -57,11 +61,13 @@ const UnassignedTasksBox = (props) => {
         >
             <Card display={tasks.length > 0 ? 'block' : 'none'}>
                 <Title>TO ASSIGN</Title>
-                {
-                    tasks.map((task) => {
-                        return  <Task task={task} key={task.id} />
-                    })
-                }
+                <TasksContainer>
+                    {
+                        tasks.map((task) => {
+                            return  <Task task={task} key={task.id} />
+                        })
+                    }
+                </TasksContainer>
             </Card>
         </Container>
     );

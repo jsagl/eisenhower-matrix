@@ -8,20 +8,21 @@ import SimpleBar from "simplebar-react";
 import Task from './task'
 import {updateTask} from "../actions";
 
-const Container = styled.div`
-  .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
-    background-color: #cacaca; 
-}
-`;
-
-const Card = styled(SimpleBar)`
+const Card = styled.div`
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   padding: 1px 0;
   margin: 15px 0;
-  min-height: 60px;
-  max-height: 15vh;
   border-radius: 3px;
   background-color: rgba(250, 250, 250, 1);
+  .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+    background-color: #cacaca; 
+  }
+`;
+
+const TasksContainer = styled(SimpleBar)`
+  min-height: 60px;
+  max-height: 110px;
+  margin: 5px 0;
 `;
 
 const Title = styled.div`
@@ -51,19 +52,21 @@ const DoneTasksBox = (props) => {
     };
 
     return (
-        <Container
+        <div
             ref={drop}
             className="col-6"
         >
             <Card>
                 <Title>DONE</Title>
-                {
-                    tasks.map((task) => {
-                        return  <Task task={task} key={task.id} />
-                    })
-                }
+                <TasksContainer>
+                    {
+                        tasks.map((task) => {
+                            return  <Task task={task} key={task.id} />
+                        })
+                    }
+                </TasksContainer>
             </Card>
-        </Container>
+        </div>
     );
 };
 

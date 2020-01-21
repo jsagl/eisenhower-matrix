@@ -8,12 +8,6 @@ import SimpleBar from 'simplebar-react';
 import Task from './task'
 import { updateTask } from "../actions";
 
-const Container = styled.div`
-  .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
-    background-color: #cacaca; 
-}
-`;
-
 const TopQuadrantLegend = styled.div`
   position: absolute;
   top: -15px;
@@ -32,13 +26,20 @@ const LeftQuadrantLegend = styled.div`
   font-weight: bold;
 `;
 
-const Card = styled(SimpleBar)`
+const Card = styled.div`
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   padding: 1px 0;
   margin: 15px 0;
-  height: 30vh;
   border-radius: 3px;
   background-color: rgba(250, 250, 250, 1);
+  .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+    background-color: #cacaca; 
+  }
+`;
+
+const TasksContainer = styled(SimpleBar)`
+  height: calc(30vh - 20px);
+  margin: 5px 0;
 `;
 
 const Title = styled.div`
@@ -70,7 +71,7 @@ const Quadrant = (props) => {
     const translateValue = props.topLegend === '' ? '-68px' : '-50px';
 
     return (
-        <Container
+        <div
             className="col-6"
             ref={drop}
         >
@@ -78,13 +79,15 @@ const Quadrant = (props) => {
             <LeftQuadrantLegend translateValue={translateValue}>{props.leftLegend}</LeftQuadrantLegend>
             <Card>
                 <Title>{props.title}</Title>
-                {
-                    tasks.map((task) => {
-                       return  <Task task={task} key={task.id} />
-                    })
-                }
+                <TasksContainer>
+                    {
+                        tasks.map((task) => {
+                           return  <Task task={task} key={task.id} />
+                        })
+                    }
+                </TasksContainer>
             </Card>
-        </Container>
+        </div>
     );
 };
 

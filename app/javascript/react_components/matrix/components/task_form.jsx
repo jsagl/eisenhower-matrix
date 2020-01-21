@@ -56,7 +56,7 @@ const TaskForm = (props) => {
             name: nameInput,
             description: descriptionInput,
             status: status,
-            due_date: new Date(dueDate.getTime() + 720*60000),
+            due_date: dueDate == null ? null : new Date(dueDate.getTime() + 720*60000),
             time_to_complete: timeToComplete,
             category_id: category
         };

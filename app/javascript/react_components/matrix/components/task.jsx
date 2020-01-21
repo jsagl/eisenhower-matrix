@@ -18,10 +18,10 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: all .2s ease-in-out;
-  &:hover {
-    transform: scale(1.005);
-  }
+  transition: all 0.1s linear;
+  &:hover{
+    background-color: rgba(252, 252, 252, 1)
+  } 
 `;
 
 const ColorMarker = styled.div`
@@ -35,10 +35,18 @@ const ColorMarker = styled.div`
 const Checkbox = styled.div`
   color: #dadada;
   margin-right: 10px;
+  transition: all .1s linear;
+  &:hover {
+    color: #b4b4b4;
+  }
 `;
 
 const DeleteCross = styled.div`
   color: #e3e3e3;
+  transition: all .1s linear;
+  &:hover {
+    color: #b4b4b4;
+  }
 `;
 
 const Content = styled.div`
@@ -180,10 +188,10 @@ const Task = (props) => {
         let backgroundColor;
         let fontColor;
 
-        if (remainingDays <= 1) {
+        if (remainingDays < 1) {
             backgroundColor = '#FFD6D4';
             fontColor = '#FF6961';
-        } else if (remainingDays > 1 && remainingDays <= 7) {
+        } else if (remainingDays >= 1 && remainingDays <= 7) {
             backgroundColor = '#FFE5B4';
             fontColor = '#FF7F00';
         } else {
