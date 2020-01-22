@@ -8,15 +8,14 @@ import styled from 'styled-components';
 import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
 import DoneTasksBox from "./doneTasksBox";
-import CreateTaskButton from './create_task_button';
 import TaskModal from './task_modal';
 import {fetchCategories, fetchTasks} from "../actions";
 import CategoryModal from "./category_modal";
-import CategoryList from "./category_list";
 import Sidebar from './sidebar'
+import SideDrawer from './side_drawer'
 
 const Container = styled.div`
-  margin: 50px 100px 50px 350px;
+  margin: 50px 80px 50px 360px;
   flex-grow: 1;
 `;
 
@@ -33,8 +32,8 @@ const Matrix = () => {
         <DndProvider backend={Backend}>
             <div className="d-flex">
                 <Sidebar/>
+                <SideDrawer/>
                 <Container className="">
-                    <CreateTaskButton/>
                     <div className="row justify-content-center">
                         <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
                     </div>

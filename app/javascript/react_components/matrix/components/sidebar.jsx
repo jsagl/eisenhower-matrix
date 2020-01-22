@@ -1,48 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
-import CategoryList from "./category_list";
-import MatrixList from "./matrix_list";
+import colors from "../../../stylesheets/colors";
+import CreateTaskButton from "./create_task_button";
 
 const Container = styled.div`
-  background-color: dodgerblue;
+  background-color: ${props => colors.primaryColor};
   height: 100%;
   position: fixed;
   z-index: 1;
-  width: 250px;
+  width: 60px;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: start;
+  border-right: 1px solid darkblue;
 `;
 
 const Brand = styled.div`
-  margin-left: 20px;
-  margin-top: 20px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  h2 {
-    color: white;
-    margin: 0;
-  }
+  margin: 20px 10px;
 `;
 
-const Logo = styled.div`
+const Logo = styled.img`
   width: 40px;
-  height: 40px;
-  background-color: white;
   margin-right: 10px;
-`;
+ `;
+
+const LogoUrl = require('../../../../assets/images/logo_transparent_cropped2.png');
 
 const Sidebar = (props) => {
     return (
         <Container>
             <Brand>
-                <Logo></Logo>
-                <h2>Brand</h2>
+                <Logo src={LogoUrl} alt=""/>
             </Brand>
-            <MatrixList/>
-            <CategoryList/>
+            <CreateTaskButton/>
         </Container>
     );
 };
