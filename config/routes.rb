@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :matrices do
+      resources :matrices, only: [:index] do
         resources :tasks, only: [:index, :create, :update, :destroy]
         resources :categories, only: [:index, :create, :update]
       end
