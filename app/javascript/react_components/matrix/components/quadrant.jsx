@@ -19,6 +19,7 @@ const TopQuadrantLegend = styled.div`
 
 const LeftQuadrantLegend = styled.div`
   position: absolute;
+  z-index: 5;
   left: ${props => props.translateValue};
   top: 50%;
   transform: translateY(-50%) rotate(-90deg);

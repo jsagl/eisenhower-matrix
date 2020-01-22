@@ -11,18 +11,15 @@ const Container = styled.div`
   .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
     background-color: #cacaca;
   }
-  padding: 6px 0 1px 0;
+  padding: 3px 0 1px 0;
   margin: 15px 15px;
   background-color: white;
   width: 220px;
   border-radius: 3px;
-  border-top: 8px solid ${colors.complementaryColor};
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
-  display: ${props => props.display};
 `;
 
 const List = styled(SimpleBar)`
-  max-height: 180px;
   width: 100%;
 `;
 
@@ -52,7 +49,7 @@ const CategoryList = (props) => {
     };
 
     return (
-        <Container display={props.display}>
+        <Container>
             <div>
                 <Title>CATEGORIES <i className="fas fa-plus" onClick={handleClick}></i></Title>
                 <List>

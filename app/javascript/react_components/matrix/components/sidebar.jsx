@@ -13,7 +13,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  border-right: 1px solid darkblue;
 `;
 
 const Brand = styled.div`

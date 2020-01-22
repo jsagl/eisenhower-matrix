@@ -50,7 +50,6 @@ const TaskForm = (props) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(dueDate);
 
         const body = {
             name: nameInput,

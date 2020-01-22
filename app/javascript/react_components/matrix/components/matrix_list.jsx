@@ -5,25 +5,22 @@ import styled from "styled-components";
 import colors from "../../../stylesheets/colors";
 import SimpleBar from 'simplebar-react';
 
-import Category from './category'
-import {fetchCategories, fetchMatrices, fetchTasks, openCategoryModal} from "../actions";
+import {fetchCategories, fetchMatrices, fetchTasks} from "../actions";
 
 const Container = styled.div`
   .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
     background-color: #cacaca;
   }
-  padding: 6px 0 1px 0;
+  padding: 3px 0 1px 0;
   margin: 15px 15px;
   background-color: white;
   width: 220px;
   border-radius: 3px;
-  border-top: 8px solid ${colors.complementaryColor};
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   display: ${props => props.display};
 `;
 
 const List = styled(SimpleBar)`
-  max-height: 180px;
   width: 100%;
 `;
 
@@ -47,7 +44,11 @@ const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
   cursor: pointer;
-
+  font-weight: ${props => props.fontWeight};
+  &:hover {
+    color: ${colors.secondaryColor};
+    text-decoration: none;
+  }
 `;
 
 const MatrixName = styled.div`
@@ -64,22 +65,21 @@ const MatrixName = styled.div`
 
 const MatrixList = (props) => {
     const matrices = useSelector(state => state.matrices);
+    const [selectedMatrix, setSelectedMatrix] = useState(parseInt(useParams().matrix, 10));
     const dispatch = useDispatch();
-
-    const [currentMatrix, setCurrentMatrix] = useState(useParams().matrix);
 
     useEffect(()=> {
         dispatch(fetchMatrices());
-    }, []);
+    }, [dispatch]);
 
     const handleClick = (matrixId) => {
-        setCurrentMatrix(matrixId);
+        setSelectedMatrix(matrixId);
         dispatch(fetchTasks(matrixId));
         dispatch(fetchCategories(matrixId));
     };
 
     return (
-        <Container display={props.display}>
+        <Container>
             <div>
                 <Title>MATRICES</Title>
                 <List>
@@ -90,6 +90,7 @@ const MatrixList = (props) => {
                                     <i className="fas fa-hashtag"></i>
                                     <StyledLink
                                         to={`${matrix.id}`}
+                                        fontWeight={matrix.id === selectedMatrix ? 'bold' : 'normal'}
                                         onClick={() => handleClick(matrix.id)}
                                     >
                                         {matrix.name}
