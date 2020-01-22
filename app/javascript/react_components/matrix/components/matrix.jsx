@@ -48,8 +48,7 @@ const Matrix = () => {
                         <Quadrant title={'DELETE'} topLegend={''} leftLegend={''} tasksFilter={positionToNum.notImportantNotUrgent}/>
                     </div>
                     <br/>
-                    <div className="row justify-content-start align-items-start">
-                        <CategoryList/>
+                    <div className="row justify-content-center">
                         <DoneTasksBox tasksFilter={positionToNum.done}/>
                     </div>
                     <TaskModal/>

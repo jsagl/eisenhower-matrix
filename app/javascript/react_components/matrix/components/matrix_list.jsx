@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {Link, useParams} from 'react-router-dom'
 import styled from "styled-components";
 import SimpleBar from 'simplebar-react';
 
 import Category from './category'
-import {openCategoryModal} from "../actions";
+import {fetchCategories, fetchMatrices, fetchTasks, openCategoryModal} from "../actions";
 
 const Container = styled.div`
   .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
@@ -41,22 +42,40 @@ const Title = styled.div`
   }
 `;
 
-const CategoryList = () => {
-    const categories = useSelector(state => state.categories);
+const MatrixName = styled.div`
+
+`;
+
+const MatrixList = () => {
+    const matrices = useSelector(state => state.matrices);
     const dispatch = useDispatch();
 
-    const handleClick = () => {
-        dispatch(openCategoryModal('CATEGORY_CREATION'));
+    const [currentMatrix, setCurrentMatrix] = useState(useParams().matrix);
+
+    useEffect(()=> {
+        dispatch(fetchMatrices());
+    }, []);
+
+    const handleClick = (matrixId) => {
+        setCurrentMatrix(matrixId);
+        dispatch(fetchTasks(matrixId));
+        dispatch(fetchCategories(matrixId));
     };
 
     return (
         <Container>
             <div>
-                <Title>CATEGORIES <i className="fas fa-plus" onClick={handleClick}></i></Title>
+                <Title>MATRICES</Title>
                 <List>
                     {
-                        categories.map((category) => {
-                            return  <Category category={category} key={category.id} />
+                        matrices.map((matrix) => {
+                            return  <Link
+                                to={`${matrix.id}`}
+                                onClick={() => handleClick(matrix.id)}
+                                key={matrix.id}
+                            >
+                                {matrix.name}
+                            </Link>
                         })
                     }
                 </List>
@@ -65,4 +84,4 @@ const CategoryList = () => {
     );
 };
 
-export default CategoryList;
+export default MatrixList;

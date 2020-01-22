@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import {openCategoryModal} from "../actions";
 
 const Container = styled.div`
-  margin: 5px;
+  margin: 0 5px;
   height: 30px;
   border-radius: 3px;
   display: flex;

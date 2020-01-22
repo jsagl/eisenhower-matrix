@@ -10,6 +10,7 @@ const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 const OPEN_CATEGORY_MODAL = 'OPEN_CATEGORY_MODAL';
 const CLOSE_CATEGORY_MODAL = 'CLOSE_CATEGORY_MODAL';
 const DOM_TASK_COLORS_UPDATE = 'DOM_TASK_COLORS_UPDATE';
+const FETCH_MATRICES = 'FETCH_MATRICES';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
@@ -199,7 +200,15 @@ const domTaskColorsUpdate = (categoryId, color) => {
     }
 };
 
+const fetchMatrices = (matrixId) => {
+    const promise = fetch(`/api/v1/matrices`, { credentials: 'same-origin' })
+        .then(response => response.json());
 
+    return {
+        type: FETCH_MATRICES,
+        payload: promise
+    }
+};
 
 export {
     fetchTasks, FETCH_TASKS,
@@ -213,5 +222,6 @@ export {
     updateCategory, UPDATE_CATEGORY,
     openCategoryModal, OPEN_CATEGORY_MODAL,
     closeCategoryModal, CLOSE_CATEGORY_MODAL,
-    domTaskColorsUpdate, DOM_TASK_COLORS_UPDATE
+    domTaskColorsUpdate, DOM_TASK_COLORS_UPDATE,
+    fetchMatrices, FETCH_MATRICES
 }
