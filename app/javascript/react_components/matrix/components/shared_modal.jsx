@@ -5,7 +5,15 @@ import Modal from "react-bootstrap/Modal";
 import {closeModal} from "../actions";
 import TaskForm from "./forms/task_form";
 import CategoryForm from "./forms/category_form";
-import {CATEGORY_CREATION, CATEGORY_UPDATE, TASK_CREATION, TASK_UPDATE} from "../constants/constants";
+import MatrixForm from "./forms/matrix_form";
+import {
+    CATEGORY_CREATION,
+    CATEGORY_UPDATE,
+    MATRIX_CREATION,
+    MATRIX_UPDATE,
+    TASK_CREATION,
+    TASK_UPDATE
+} from "../constants/constants";
 
 const SharedModal = () => {
     const show = useSelector(state => state.modal.display);
@@ -21,6 +29,8 @@ const SharedModal = () => {
         form = <TaskForm/>
     } else if (modalType === CATEGORY_CREATION || modalType === CATEGORY_UPDATE) {
         form = <CategoryForm/>
+    } else if (modalType === MATRIX_CREATION || modalType === MATRIX_UPDATE) {
+        form = <MatrixForm/>
     }
 
     return (

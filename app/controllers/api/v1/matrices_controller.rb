@@ -1,8 +1,8 @@
 class Api::V1::MatricesController < ApplicationController
-  before_action :set_matrix, only: [:create, :destroy]
+  before_action :set_matrix, only: [:update, :destroy]
 
   def index
-    matrices = Matrix.where(user: current_user)
+    matrices = Matrix.where(user: current_user).order(:name)
 
     render status: :ok, json: matrices
   end

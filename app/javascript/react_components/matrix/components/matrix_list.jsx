@@ -5,7 +5,8 @@ import styled from "styled-components";
 import colors from "../../../stylesheets/colors";
 import SimpleBar from 'simplebar-react';
 
-import {fetchCategories, fetchMatrices, fetchTasks} from "../actions";
+import {fetchCategories, fetchMatrices, fetchTasks, openModal} from "../actions";
+import {MATRIX_CREATION, MATRIX_UPDATE} from "../constants/constants";
 
 const Container = styled.div`
   .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
@@ -78,10 +79,14 @@ const MatrixList = (props) => {
         dispatch(fetchCategories(matrixId));
     };
 
+    const openSharedModal = (type, modalProps) => {
+        dispatch(openModal(type, modalProps))
+    };
+
     return (
         <Container>
             <div>
-                <Title>MATRICES</Title>
+                <Title>MATRICES <i className="fas fa-plus" onClick={() => openSharedModal(MATRIX_CREATION, {title: 'Create matrix'})}></i></Title>
                 <List>
                     {
                         matrices.map((matrix) => {
@@ -96,6 +101,8 @@ const MatrixList = (props) => {
                                     >
                                         {matrix.name}
                                     </StyledLink>
+                                    <i className="fas fa-pen" onClick={() => openSharedModal(MATRIX_UPDATE, {title: 'Update matrix', matrix: matrix})}></i>
+                                    <i className="fas fa-times"></i>
                                 </MatrixName>
                             )
                         })

@@ -55,7 +55,7 @@ const CategoryForm = (props) => {
                     id="category-name-field"
                     key="category-name-field"
                     name="categoryNameInput"
-                    placeholder="Task name"
+                    placeholder="Category name"
                     onChange={handleChange}
                     value={nameInput}
                 />

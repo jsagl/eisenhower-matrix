@@ -9,6 +9,9 @@ const CREATE_CATEGORY = 'CREATE_CATEGORY';
 const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 const DOM_TASK_COLORS_UPDATE = 'DOM_TASK_COLORS_UPDATE';
 const FETCH_MATRICES = 'FETCH_MATRICES';
+const CREATE_MATRIX = 'CREATE_MATRIX';
+const UPDATE_MATRIX = 'UPDATE_MATRIX';
+const DELETE_MATRIX = 'DELETE_MATRIX';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
@@ -188,6 +191,71 @@ const fetchMatrices = (matrixId) => {
     }
 };
 
+const createMatrix = (body) => {
+    const promise = fetch(
+        `/api/v1/matrices`,
+        {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                'X-CSRF-Token': csrfToken
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(body),
+        }
+    ).then(response => response.json())
+        .catch(handleError);
+
+    return {
+        type: CREATE_MATRIX,
+        payload: promise
+    }
+};
+
+const updateMatrix = (matrixId, body) => {
+    const promise = fetch(
+        `/api/v1/matrices/${matrixId}`,
+        {
+            method: "PATCH",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                'X-CSRF-Token': csrfToken
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(body),
+        }
+    ).then(response => response.json())
+        .catch(handleError);
+
+    return {
+        type: UPDATE_MATRIX,
+        payload: promise
+    }
+};
+
+const deleteMatrix = (matrixId) => {
+    const promise = fetch(
+        `/api/v1/matrices/${matrixId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                'X-CSRF-Token': csrfToken
+            },
+            credentials: 'same-origin'
+        }
+    ).catch(handleError);
+
+    return {
+        type: DELETE_MATRIX,
+        payload: promise,
+        matrixId: matrixId
+    }
+};
+
 export {
     fetchTasks, FETCH_TASKS,
     createTask, CREATE_TASK,
@@ -199,5 +267,8 @@ export {
     createCategory, CREATE_CATEGORY,
     updateCategory, UPDATE_CATEGORY,
     domTaskColorsUpdate, DOM_TASK_COLORS_UPDATE,
-    fetchMatrices, FETCH_MATRICES
+    fetchMatrices, FETCH_MATRICES,
+    createMatrix, CREATE_MATRIX,
+    updateMatrix, UPDATE_MATRIX,
+    deleteMatrix, DELETE_MATRIX,
 }

@@ -12,18 +12,7 @@ const tasksReducer = (state, action) => {
             return action.payload;
         case CREATE_TASK:
             updatedTasksList.push(action.payload);
-            updatedTasksList.sort((a, b) => {
-                return new Date(a.due_date) - new Date(b.due_date)
-            });
-            return updatedTasksList;
-        case UPDATE_TASK:
-            const updatedTask = action.payload
-            updatedTasksList.find((task, i, updatedTasksList) => {
-               if (task.id === updatedTask.id) {
-                   updatedTasksList[i] = updatedTask;
-                   return true
-               }
-            });
+
             updatedTasksList.sort((a, b) => {
                 if (a.due_date === b.due_date) {
                     return 0;
@@ -35,7 +24,32 @@ const tasksReducer = (state, action) => {
                     return new Date(a.due_date) - new Date(b.due_date)
                 }
             });
+
             return updatedTasksList;
+
+        case UPDATE_TASK:
+            const updatedTask = action.payload
+            updatedTasksList.find((task, i, updatedTasksList) => {
+               if (task.id === updatedTask.id) {
+                   updatedTasksList[i] = updatedTask;
+                   return true
+               }
+            });
+
+            updatedTasksList.sort((a, b) => {
+                if (a.due_date === b.due_date) {
+                    return 0;
+                } else if (a.due_date == null) {
+                    return 1;
+                } else if (b.due_date == null) {
+                    return -1;
+                } else {
+                    return new Date(a.due_date) - new Date(b.due_date)
+                }
+            });
+
+            return updatedTasksList;
+
         case DELETE_TASK:
             updatedTasksList.find((task, i, updatedTasksList) => {
                 if (task.id === action.taskId) {
@@ -43,17 +57,30 @@ const tasksReducer = (state, action) => {
                     return true
                 }
             });
+
             updatedTasksList.sort((a, b) => {
-                return new Date(a.due_date) - new Date(b.due_date)
+                if (a.due_date === b.due_date) {
+                    return 0;
+                } else if (a.due_date == null) {
+                    return 1;
+                } else if (b.due_date == null) {
+                    return -1;
+                } else {
+                    return new Date(a.due_date) - new Date(b.due_date)
+                }
             });
+
             return updatedTasksList;
+
         case DOM_TASK_COLORS_UPDATE:
             updatedTasksList.find((task, i, updatedTasksList) => {
                 if (task.category_id === action.payload.categoryId) {
                     updatedTasksList[i].color = action.payload.color;
                 }
             });
+
             return updatedTasksList;
+
         default:
             return state;
     }
