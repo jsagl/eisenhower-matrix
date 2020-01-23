@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from 'styled-components';
 import colors from "../../../stylesheets/colors.js"
 
-import { openTaskModal } from '../actions/index';
+import { openModal } from '../actions/index';
 
 const Button = styled.button`
   background-color: ${colors.primaryColor};
@@ -32,7 +32,7 @@ const CreateTaskButton = (props) => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(openTaskModal('TASK_CREATION'));
+        dispatch(openModal('TASK_CREATION', {title: 'Create task'}));
     };
 
     return (

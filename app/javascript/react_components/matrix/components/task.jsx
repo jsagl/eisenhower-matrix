@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useDrag } from 'react-dnd'
 
-import {openTaskModal, updateTask, deleteTask} from "../actions";
+import {openModal, deleteTask, updateTask} from "../actions";
 import { positionToNum } from "./matrix";
+import {TASK_UPDATE} from "../constants/constants";
 
 const Container = styled.div`
   box-shadow: 0px 2px 7px 2px rgba(100, 100, 100, 0.1);
@@ -132,9 +133,9 @@ const Task = (props) => {
         }),
     });
 
-    const openModal = (e) => {
+    const openSharedModal = (e) => {
         if (e.target.tagName !== 'I') {
-            dispatch(openTaskModal('TASK_UPDATE', {task: props.task, title: 'Update task'}));
+            dispatch(openModal(TASK_UPDATE, {task: props.task, title: 'Update task'}));
         }
     };
 
@@ -210,7 +211,7 @@ const Task = (props) => {
             style={{
                 opacity: isDragging ? 0.5 : 1,
             }}
-            onClick={openModal}
+            onClick={openSharedModal}
         >
             <Container>
                 <LeftSubContainer>

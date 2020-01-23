@@ -14,6 +14,7 @@ import CategoryModal from "./category_modal";
 import Sidebar from './sidebar'
 import SideDrawer from './side_drawer'
 import colors from "../../../stylesheets/colors";
+import SharedModal from "./shared_modal";
 
 const Container = styled.div`
   margin-left: ${props => props.marginLeft};
@@ -117,6 +118,7 @@ const Matrix = () => {
                         <div className="row justify-content-center">
                             <DoneTasksBox tasksFilter={positionToNum.done}/>
                         </div>
+                        <SharedModal/>
                         <TaskModal/>
                         <CategoryModal/>
                     </SubContainer>

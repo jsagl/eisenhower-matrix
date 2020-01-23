@@ -4,8 +4,8 @@ import styled from "styled-components";
 import SimpleBar from 'simplebar-react';
 
 import Category from './category'
-import {openCategoryModal} from "../actions";
-import colors from "../../../stylesheets/colors";
+import {openModal} from "../actions";
+import {CATEGORY_CREATION} from "../constants/constants";
 
 const Container = styled.div`
   .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
@@ -45,7 +45,7 @@ const CategoryList = (props) => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(openCategoryModal('CATEGORY_CREATION'));
+        dispatch(openModal(CATEGORY_CREATION, {title: 'Create category'}));
     };
 
     return (

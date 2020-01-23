@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
-import {openCategoryModal} from "../actions";
+import {openModal} from "../actions";
+import {CATEGORY_UPDATE} from "../constants/constants";
 
 const Container = styled.div`
   margin: 0 5px;
@@ -36,12 +37,12 @@ const Category = (props) => {
     const matrixId = useParams().matrix;
     const dispatch = useDispatch();
 
-    const openModal = (e) => {
-        dispatch(openCategoryModal('CATEGORY_UPDATE', {title: 'Update category', category: props.category}));
+    const openSharedModal = (e) => {
+        dispatch(openModal(CATEGORY_UPDATE, {title: 'Update category', category: props.category}));
     };
 
     return (
-        <div onClick={openModal}>
+        <div onClick={openSharedModal}>
             <Container>
                 <ColorMarker color={props.category.color} />
                 <span>{props.category.name}</span>

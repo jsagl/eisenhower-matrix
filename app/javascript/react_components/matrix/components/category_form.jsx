@@ -2,16 +2,17 @@ import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
-import {closeCategoryModal, createCategory, domTaskColorsUpdate, updateCategory} from '../actions/index';
+import {closeCategoryModal, closeModal, createCategory, domTaskColorsUpdate, updateCategory} from '../actions/index';
+import {CATEGORY_UPDATE} from "../constants/constants";
 
 const CategoryForm = (props) => {
     const matrixId = useParams().matrix;
-    const modalType = useSelector(state => state.categoryModal.modalType);
-    const modalProps = useSelector(state => state.categoryModal.modalProps);
+    const modalType = useSelector(state => state.modal.modalType);
+    const modalProps = useSelector(state => state.modal.modalProps);
     const dispatch = useDispatch();
 
-    const initialName = modalType === 'CATEGORY_UPDATE' ? modalProps.category.name : '';
-    const initialColor = modalType === 'CATEGORY_UPDATE' ? modalProps.category.color : '#ffffff';
+    const initialName = modalType === CATEGORY_UPDATE ? modalProps.category.name : '';
+    const initialColor = modalType === CATEGORY_UPDATE ? modalProps.category.color : '#ffffff';
 
     const [nameInput, setNameInput] = useState(initialName);
     const [color, setColor] = useState(initialColor);
@@ -33,7 +34,7 @@ const CategoryForm = (props) => {
             color: color,
         };
 
-        if (modalType === 'CATEGORY_UPDATE') {
+        if (modalType === CATEGORY_UPDATE) {
             dispatch(updateCategory(matrixId, modalProps.category.id, body));
             dispatch(domTaskColorsUpdate(modalProps.category.id, color));
         } else {
@@ -42,7 +43,7 @@ const CategoryForm = (props) => {
 
         setNameInput('');
         setColor('#ffffff');
-        dispatch(closeCategoryModal());
+        dispatch(closeModal());
     };
 
     return (

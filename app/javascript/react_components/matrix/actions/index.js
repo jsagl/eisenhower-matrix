@@ -2,6 +2,8 @@ const FETCH_TASKS = 'FETCH_TASKS';
 const CREATE_TASK = 'CREATE_TASK';
 const UPDATE_TASK = 'UPDATE_TASK';
 const DELETE_TASK = 'DELETE_TASK';
+const CLOSE_MODAL = 'CLOSE_MODAL';
+const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_TASK_MODAL = 'CLOSE_TASK_MODAL';
 const OPEN_TASK_MODAL = 'OPEN_TASK_MODAL';
 const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
@@ -57,6 +59,26 @@ const closeTaskModal = () => {
         type: CLOSE_TASK_MODAL,
         payload: {
             display: false,
+        }
+    }
+};
+
+const closeModal = () => {
+    return {
+        type: CLOSE_MODAL,
+        payload: {
+            display: false,
+        }
+    }
+};
+
+const openModal = (modalType, modalProps) => {
+    return {
+        type: OPEN_MODAL,
+        payload: {
+            display: true,
+            modalType: modalType,
+            modalProps: modalProps
         }
     }
 };
@@ -215,6 +237,8 @@ export {
     createTask, CREATE_TASK,
     updateTask, UPDATE_TASK,
     deleteTask, DELETE_TASK,
+    closeModal, CLOSE_MODAL,
+    openModal, OPEN_MODAL,
     closeTaskModal, CLOSE_TASK_MODAL,
     openTaskModal, OPEN_TASK_MODAL,
     fetchCategories, FETCH_CATEGORIES,

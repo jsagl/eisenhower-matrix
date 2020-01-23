@@ -3,24 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker/es";
 
-import {closeTaskModal, createTask, updateTask} from '../actions/index';
+import {closeModal, closeTaskModal, createTask, updateTask} from '../actions/index';
 import { positionToNum } from "./matrix";
 import TaskFormMatrix from "./task_form_matrix";
 import TaskFormRadioButton from "./task_form_radio_btn_list";
+import {TASK_CREATION, TASK_UPDATE} from "../constants/constants";
 
 const TaskForm = (props) => {
     const matrixId = useParams().matrix;
-    const modalType = useSelector(state => state.taskModal.modalType);
-    const modalProps = useSelector(state => state.taskModal.modalProps);
+    const modalType = useSelector(state => state.modal.modalType);
+    const modalProps = useSelector(state => state.modal.modalProps);
     const categories = useSelector(state => state.categories);
     const dispatch = useDispatch();
 
-    const initialName = modalType === 'TASK_UPDATE' ? modalProps.task.name : '';
-    const initialDescription = modalType === 'TASK_UPDATE' ? modalProps.task.description : '';
-    const initialCategory = modalType === 'TASK_UPDATE' ? modalProps.task.category_id : categories[0].id;
-    const initialStatus = modalType === 'TASK_UPDATE' ? modalProps.task.status : positionToNum.toBeAssigned;
-    const initialTimeToComplete = modalType === 'TASK_UPDATE' ? modalProps.task.time_to_complete : 15;
-    const initialDate = (modalType === 'TASK_UPDATE') && (modalProps.task.due_date != null) ? new Date(modalProps.task.due_date) : null;
+    const initialName = modalType === TASK_UPDATE ? modalProps.task.name : '';
+    const initialDescription = modalType === TASK_UPDATE ? modalProps.task.description : '';
+    const initialCategory = modalType === TASK_UPDATE ? modalProps.task.category_id : categories[0].id;
+    const initialStatus = modalType === TASK_UPDATE ? modalProps.task.status : positionToNum.toBeAssigned;
+    const initialTimeToComplete = modalType === TASK_UPDATE ? modalProps.task.time_to_complete : 15;
+    const initialDate = (modalType === TASK_UPDATE) && (modalProps.task.due_date != null) ? new Date(modalProps.task.due_date) : null;
 
     const [nameInput, setNameInput] = useState(initialName);
     const [descriptionInput, setDescriptionInput] = useState(initialDescription);
@@ -30,7 +31,7 @@ const TaskForm = (props) => {
     const [dueDate, setDueDate] = useState(initialDate);
 
     let initialDefaultCategoryOption;
-    if (modalType === 'TASK_CREATION') {
+    if (modalType === TASK_CREATION) {
         initialDefaultCategoryOption = <option value={category} key={'default'} disabled>Category</option>
     }
 
@@ -60,13 +61,13 @@ const TaskForm = (props) => {
             category_id: category
         };
 
-        if (modalType === 'TASK_UPDATE') {
+        if (modalType === TASK_UPDATE) {
             dispatch(updateTask(matrixId, modalProps.task.id, body))
         } else {
             dispatch(createTask(body, matrixId));
         }
 
-        dispatch(closeTaskModal());
+        dispatch(closeModal());
     };
 
     return (
