@@ -41,7 +41,7 @@ const Title = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: black;
+  color: ${props => props.color};
   text-decoration: none;
   cursor: pointer;
   font-weight: ${props => props.fontWeight};
@@ -91,6 +91,7 @@ const MatrixList = (props) => {
                                     <StyledLink
                                         to={`${matrix.id}`}
                                         fontWeight={matrix.id === selectedMatrix ? 'bold' : 'normal'}
+                                        color={matrix.id === selectedMatrix ? `${colors.secondaryColor}` : 'black'}
                                         onClick={() => handleClick(matrix.id)}
                                     >
                                         {matrix.name}
