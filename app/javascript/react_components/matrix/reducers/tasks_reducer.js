@@ -25,7 +25,15 @@ const tasksReducer = (state, action) => {
                }
             });
             updatedTasksList.sort((a, b) => {
-                return new Date(a.due_date) - new Date(b.due_date)
+                if (a.due_date === b.due_date) {
+                    return 0;
+                } else if (a.due_date == null) {
+                    return 1;
+                } else if (b.due_date == null) {
+                    return -1;
+                } else {
+                    return new Date(a.due_date) - new Date(b.due_date)
+                }
             });
             return updatedTasksList;
         case DELETE_TASK:

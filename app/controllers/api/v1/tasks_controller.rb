@@ -3,7 +3,7 @@ class Api::V1::TasksController < ApplicationController
   before_action :set_task, only: [:update, :destroy]
 
   def index
-    tasks = Task.where(matrix: @matrix).order(:due_date, :time_to_complete)
+    tasks = Task.where(matrix: @matrix).order('due_date ASC NULLS LAST, time_to_complete ASC')
 
     render status: :ok, json: Api::V1::Presenters::TasksPresenter.call(tasks)
   end
