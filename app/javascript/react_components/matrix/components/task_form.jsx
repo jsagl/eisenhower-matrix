@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker/es";
 
-import {closeModal, closeTaskModal, createTask, updateTask} from '../actions/index';
+import {closeModal, createTask, updateTask} from '../actions/index';
 import { positionToNum } from "./matrix";
 import TaskFormMatrix from "./task_form_matrix";
 import TaskFormRadioButton from "./task_form_radio_btn_list";

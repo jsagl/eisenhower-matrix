@@ -4,13 +4,9 @@ const UPDATE_TASK = 'UPDATE_TASK';
 const DELETE_TASK = 'DELETE_TASK';
 const CLOSE_MODAL = 'CLOSE_MODAL';
 const OPEN_MODAL = 'OPEN_MODAL';
-const CLOSE_TASK_MODAL = 'CLOSE_TASK_MODAL';
-const OPEN_TASK_MODAL = 'OPEN_TASK_MODAL';
 const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 const CREATE_CATEGORY = 'CREATE_CATEGORY';
 const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
-const OPEN_CATEGORY_MODAL = 'OPEN_CATEGORY_MODAL';
-const CLOSE_CATEGORY_MODAL = 'CLOSE_CATEGORY_MODAL';
 const DOM_TASK_COLORS_UPDATE = 'DOM_TASK_COLORS_UPDATE';
 const FETCH_MATRICES = 'FETCH_MATRICES';
 
@@ -54,15 +50,6 @@ const createTask = (body, matrixId) => {
     }
 };
 
-const closeTaskModal = () => {
-    return {
-        type: CLOSE_TASK_MODAL,
-        payload: {
-            display: false,
-        }
-    }
-};
-
 const closeModal = () => {
     return {
         type: CLOSE_MODAL,
@@ -75,17 +62,6 @@ const closeModal = () => {
 const openModal = (modalType, modalProps) => {
     return {
         type: OPEN_MODAL,
-        payload: {
-            display: true,
-            modalType: modalType,
-            modalProps: modalProps
-        }
-    }
-};
-
-const openTaskModal = (modalType, modalProps = {title: 'Create task'}) => {
-    return {
-        type: OPEN_TASK_MODAL,
         payload: {
             display: true,
             modalType: modalType,
@@ -192,26 +168,6 @@ const updateCategory = (matrixId, categoryId, body) => {
     }
 };
 
-const closeCategoryModal = () => {
-    return {
-        type: CLOSE_CATEGORY_MODAL,
-        payload: {
-            display: false,
-        }
-    }
-};
-
-const openCategoryModal = (modalType, modalProps = {title: 'Create category'}) => {
-    return {
-        type: OPEN_CATEGORY_MODAL,
-        payload: {
-            display: true,
-            modalType: modalType,
-            modalProps: modalProps
-        }
-    }
-};
-
 const domTaskColorsUpdate = (categoryId, color) => {
     return {
         type: DOM_TASK_COLORS_UPDATE,
@@ -239,13 +195,9 @@ export {
     deleteTask, DELETE_TASK,
     closeModal, CLOSE_MODAL,
     openModal, OPEN_MODAL,
-    closeTaskModal, CLOSE_TASK_MODAL,
-    openTaskModal, OPEN_TASK_MODAL,
     fetchCategories, FETCH_CATEGORIES,
     createCategory, CREATE_CATEGORY,
     updateCategory, UPDATE_CATEGORY,
-    openCategoryModal, OPEN_CATEGORY_MODAL,
-    closeCategoryModal, CLOSE_CATEGORY_MODAL,
     domTaskColorsUpdate, DOM_TASK_COLORS_UPDATE,
     fetchMatrices, FETCH_MATRICES
 }

@@ -8,9 +8,7 @@ import styled from 'styled-components';
 import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
 import DoneTasksBox from "./doneTasksBox";
-import TaskModal from './task_modal';
 import {fetchCategories, fetchTasks} from "../actions";
-import CategoryModal from "./category_modal";
 import Sidebar from './sidebar'
 import SideDrawer from './side_drawer'
 import colors from "../../../stylesheets/colors";
@@ -119,8 +117,6 @@ const Matrix = () => {
                             <DoneTasksBox tasksFilter={positionToNum.done}/>
                         </div>
                         <SharedModal/>
-                        <TaskModal/>
-                        <CategoryModal/>
                     </SubContainer>
                 </Container>
             </div>

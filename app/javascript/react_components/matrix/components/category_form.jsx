@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
-import {closeCategoryModal, closeModal, createCategory, domTaskColorsUpdate, updateCategory} from '../actions/index';
+import {closeModal, createCategory, domTaskColorsUpdate, updateCategory} from '../actions/index';
 import {CATEGORY_UPDATE} from "../constants/constants";
 
 const CategoryForm = (props) => {
