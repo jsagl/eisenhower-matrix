@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
-import {closeModal, createCategory, domTaskColorsUpdate, updateCategory} from '../actions/index';
-import {CATEGORY_UPDATE} from "../constants/constants";
+import {closeModal, createCategory, domTaskColorsUpdate, updateCategory} from '../../actions';
+import {CATEGORY_UPDATE} from "../../constants/constants";
 
 const CategoryForm = (props) => {
     const matrixId = useParams().matrix;

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {positionToNum} from "./matrix";
+import {positionToNum} from "../matrix";
 
 import TaskFormQuadrant from "./task_form_quadrant";
 

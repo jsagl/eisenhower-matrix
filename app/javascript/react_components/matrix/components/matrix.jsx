@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
-import DoneTasksBox from "./doneTasksBox";
+import DoneTasksBox from "./done_tasks_box";
 import {fetchCategories, fetchTasks} from "../actions";
 import Sidebar from './sidebar'
 import SideDrawer from './side_drawer'

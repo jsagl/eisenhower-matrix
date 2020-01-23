@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker/es";
 
-import {closeModal, createTask, updateTask} from '../actions/index';
-import { positionToNum } from "./matrix";
+import {closeModal, createTask, updateTask} from '../../actions';
+import { positionToNum } from "../matrix";
 import TaskFormMatrix from "./task_form_matrix";
 import TaskFormRadioButton from "./task_form_radio_btn_list";
-import {TASK_CREATION, TASK_UPDATE} from "../constants/constants";
+import {TASK_CREATION, TASK_UPDATE} from "../../constants/constants";
 
 const TaskForm = (props) => {
     const matrixId = useParams().matrix;

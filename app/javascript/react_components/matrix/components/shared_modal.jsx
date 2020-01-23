@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 
 import {closeModal} from "../actions";
-import TaskForm from "./task_form";
-import CategoryForm from "./category_form";
+import TaskForm from "./forms/task_form";
+import CategoryForm from "./forms/category_form";
 import {CATEGORY_CREATION, CATEGORY_UPDATE, TASK_CREATION, TASK_UPDATE} from "../constants/constants";
 
 const SharedModal = () => {
