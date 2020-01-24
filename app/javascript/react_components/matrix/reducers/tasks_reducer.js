@@ -1,4 +1,11 @@
-import {FETCH_TASKS, CREATE_TASK, UPDATE_TASK, DELETE_TASK, DOM_TASK_COLORS_UPDATE} from '../actions/index'
+import {
+    FETCH_TASKS,
+    CREATE_TASK,
+    UPDATE_TASK,
+    DELETE_TASK,
+    DOM_TASK_COLORS_UPDATE,
+    SEARCH_TASKS
+} from '../actions/index'
 
 const tasksReducer = (state, action) => {
     if (state === undefined) {
@@ -80,6 +87,9 @@ const tasksReducer = (state, action) => {
             });
 
             return updatedTasksList;
+
+        case SEARCH_TASKS:
+            return action.payload;
 
         default:
             return state;

@@ -5,7 +5,7 @@ class Api::V1::TasksController < ApplicationController
   def index
     if params[:query]
       tasks = Task.where(matrix: @matrix).order('due_date ASC NULLS LAST, time_to_complete ASC')
-                  .overall_search(sanitize(params[:query]))
+                  .overall_search(params[:query])
     else
       tasks = Task.where(matrix: @matrix).order('due_date ASC NULLS LAST, time_to_complete ASC')
     end

@@ -13,6 +13,7 @@ import Sidebar from './sidebar'
 import SideDrawer from './side_drawer'
 import colors from "../../../stylesheets/colors";
 import SharedModal from "./shared_modal";
+import SearchField from "./search_field";
 
 const Container = styled.div`
   margin-left: ${props => props.marginLeft};
@@ -100,6 +101,7 @@ const Matrix = () => {
                         <i className={togglerCaret}></i>
                     </DrawerToggler>
                     <SubContainer>
+                        <SearchField/>
                         <div className="row justify-content-center">
                             <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
                         </div>

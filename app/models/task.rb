@@ -12,5 +12,23 @@ class Task < ApplicationRecord
     DONE = 5
   end
 
-  pg_search_scope :overall_search, against: :task
+  pg_search_scope :overall_search,
+                  against: {name: 'A', description: 'C' },
+                  associated_against: { category: {name: 'B'} },
+                  ignoring: :accents,
+                  using: {
+                      tsearch: { prefix: true, any_word: true},
+                  }
 end
+
+
+#pg_search_scope :main_search,
+#                against: { title: 'A', punchline: 'C', tags: 'B' },
+#                associated_against: { categories: { name: 'D'} },
+#                ignoring: :accents,
+#                using: {
+#                    tsearch: { dictionary: "french",
+#                               prefix: true,
+#                               any_word: true,
+#                    }
+#                }
