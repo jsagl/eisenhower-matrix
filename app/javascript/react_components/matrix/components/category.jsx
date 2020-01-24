@@ -11,7 +11,7 @@ const Container = styled.div`
   height: 30px;
   border-radius: 3px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
 `;
@@ -25,6 +25,7 @@ const ColorMarker = styled.div`
 
 const UpdatePen = styled.div`
   margin-left: 10px;
+  margin-right: 10px;
   font-size: 14px;
   color: #e3e3e3;
   transition: all .1s linear;
@@ -33,8 +34,13 @@ const UpdatePen = styled.div`
   }
 `;
 
+const Name = styled.span`
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const Category = (props) => {
-    const matrixId = useParams().matrix;
     const dispatch = useDispatch();
 
     const openSharedModal = (e) => {
@@ -44,8 +50,10 @@ const Category = (props) => {
     return (
         <div onClick={openSharedModal}>
             <Container>
-                <ColorMarker color={props.category.color} />
-                <span>{props.category.name}</span>
+                <div className='d-flex justify-content-start align-items-center'>
+                    <ColorMarker color={props.category.color} />
+                    <Name>{props.category.name}</Name>
+                </div>
                 <UpdatePen>
                     <i className="fas fa-pen"></i>
                 </UpdatePen>

@@ -64,13 +64,13 @@ const DrawerToggler = styled.div`
 const Matrix = () => {
     const dispatch = useDispatch();
     const matrixId = useParams().matrix;
-    const [offset, setOffset] = useState(237);
+    const [offset, setOffset] = useState(217);
     const [togglerCaret, setTogglerCaret] = useState('fas fa-caret-right');
     const [caretPadding, setCaretPadding] = useState('0px 0px 0px 3px');
 
     const handleClick = () => {
         if (offset === 0) {
-            setOffset(237);
+            setOffset(217);
             setTogglerCaret('fas fa-caret-right');
             setCaretPadding('0px 0px 0px 3px');
         }
@@ -92,7 +92,7 @@ const Matrix = () => {
                 <Sidebar/>
                 <SideDrawer/>
 
-                <Container width={`calc(100% + ${offset - 310}px)`} marginLeft={`${310 - offset}px`}>
+                <Container width={`calc(100% + ${offset - 290}px)`} marginLeft={`${290 - offset}px`}>
                     <DrawerToggler
                         onClick={handleClick}
                         caretPadding={caretPadding}

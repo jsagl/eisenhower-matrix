@@ -12,10 +12,10 @@ const Container = styled.div`
   .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
     background-color: #cacaca;
   }
-  padding: 3px 0 1px 0;
+  padding: 3px 0 3px 0;
   margin: 15px 15px;
   background-color: white;
-  width: 220px;
+  width: 200px;
   border-radius: 3px;
   box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.1);
   display: ${props => props.display};
@@ -42,9 +42,13 @@ const Title = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: ${props => props.color};
+  color: black;
   text-decoration: none;
   cursor: pointer;
+  display: block;
+  max-width: 105px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: ${props => props.fontWeight};
   &:hover {
     color: ${colors.secondaryColor};
@@ -56,11 +60,23 @@ const MatrixName = styled.div`
   margin: 0 5px;
   display: flex;
   align-items: center;
-  i {
-    width: 8px;
-    margin-right: 10px;
-    font-size: 14px;
-    color: ${colors.secondaryColor}
+  justify-content: space-between;
+  div {
+      i {
+        width: 8px;
+        margin-right: 10px;
+        font-size: 14px;
+        color: ${colors.secondaryColor}
+      }
+      .fa-pen, .fa-times{
+        margin-left: 10px;
+        font-size: 14px;
+        color: #e3e3e3;
+        transition: all .1s linear;
+        &:hover {
+          color: #b4b4b4;
+        }
+      }
   }
 `;
 
@@ -92,17 +108,20 @@ const MatrixList = (props) => {
                         matrices.map((matrix) => {
                             return (
                                 <MatrixName key={matrix.id}>
-                                    <i className="fas fa-hashtag"></i>
-                                    <StyledLink
-                                        to={`${matrix.id}`}
-                                        fontWeight={matrix.id === selectedMatrix ? 'bold' : 'normal'}
-                                        color={matrix.id === selectedMatrix ? `${colors.secondaryColor}` : 'black'}
-                                        onClick={() => handleClick(matrix.id)}
-                                    >
-                                        {matrix.name}
-                                    </StyledLink>
-                                    <i className="fas fa-pen" onClick={() => openSharedModal(MATRIX_UPDATE, {title: 'Update matrix', matrix: matrix})}></i>
-                                    <i className="fas fa-times"></i>
+                                    <div className='d-flex align-items-center justify-content-start'>
+                                        <i className="fas fa-hashtag"></i>
+                                        <StyledLink
+                                            to={`${matrix.id}`}
+                                            fontWeight={matrix.id === selectedMatrix ? 'bold' : 'normal'}
+                                            onClick={() => handleClick(matrix.id)}
+                                        >
+                                            {matrix.name}
+                                        </StyledLink>
+                                    </div>
+                                    <div>
+                                        <i className="fas fa-pen" onClick={() => openSharedModal(MATRIX_UPDATE, {title: 'Update matrix', matrix: matrix})}></i>
+                                        <i className="fas fa-times"></i>
+                                    </div>
                                 </MatrixName>
                             )
                         })

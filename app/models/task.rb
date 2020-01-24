@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  include PgSearch::Model
   belongs_to :matrix
   belongs_to :category
 
@@ -10,4 +11,6 @@ class Task < ApplicationRecord
     NOT_IMPORTANT_NOT_URGENT = 4
     DONE = 5
   end
+
+  pg_search_scope :overall_search, against: :task
 end

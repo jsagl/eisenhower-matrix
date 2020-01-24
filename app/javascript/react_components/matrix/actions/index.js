@@ -12,6 +12,7 @@ const FETCH_MATRICES = 'FETCH_MATRICES';
 const CREATE_MATRIX = 'CREATE_MATRIX';
 const UPDATE_MATRIX = 'UPDATE_MATRIX';
 const DELETE_MATRIX = 'DELETE_MATRIX';
+const SEARCH_TASKS = 'SEARCH_TASKS';
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 
@@ -256,6 +257,16 @@ const deleteMatrix = (matrixId) => {
     }
 };
 
+const searchTasks = (matrixId, query) => {
+    const promise = fetch(`/api/v1/matrices/${matrixId}/tasks?query=${query}`, { credentials: 'same-origin' })
+        .then(response => response.json());
+
+    return {
+        type: SEARCH_TASKS,
+        payload: promise
+    }
+}
+
 export {
     fetchTasks, FETCH_TASKS,
     createTask, CREATE_TASK,
@@ -271,4 +282,5 @@ export {
     createMatrix, CREATE_MATRIX,
     updateMatrix, UPDATE_MATRIX,
     deleteMatrix, DELETE_MATRIX,
+    searchTasks, SEARCH_TASKS
 }

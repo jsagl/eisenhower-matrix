@@ -12,7 +12,7 @@ const Container = styled.div`
   position: fixed;
   z-index: 2;
   margin-left: 60px;
-  width: 250px;
+  width: 230px;
   display: flex;
   flex-direction: column;
   align-items: start;

@@ -39,7 +39,7 @@ const Card = styled.div`
 `;
 
 const TasksContainer = styled(SimpleBar)`
-  height: calc(30vh - 20px);
+  height: calc(29vh - 20px);
   margin: 5px 0;
 `;
 
