@@ -2,6 +2,12 @@ import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import {fetchTasks, searchTasks} from "../actions";
+import styled from "styled-components";
+import colors from "../../../stylesheets/colors";
+
+const Field = styled.input`
+  margin: 0px 5px;
+`;
 
 const SearchField = (props) => {
     const matrixId = useParams().matrix;
@@ -18,8 +24,20 @@ const SearchField = (props) => {
         }
     };
 
+    const handleEscapeEnter = (e) => {
+        if (e.keyCode === 27 || e.keyCode === 13) {
+            props.setDrawerWidth('0px');
+            props.setBtnBackgroundColor(colors.primaryColor);
+        }
+    };
+
+    const handleBlur = () => {
+        props.setDrawerWidth('0px');
+        props.setBtnBackgroundColor(colors.primaryColor);
+    };
+
     return (
-        <input
+        <Field
             type="text"
             className="form-control"
             id="search-field"
@@ -27,6 +45,8 @@ const SearchField = (props) => {
             name="searchInput"
             placeholder="Search"
             onChange={handleChange}
+            onKeyDown={handleEscapeEnter}
+            onBlur={handleBlur}
             value={searchInput}
         />
     );

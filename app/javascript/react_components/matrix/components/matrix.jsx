@@ -13,7 +13,6 @@ import Sidebar from './sidebar'
 import SideDrawer from './side_drawer'
 import colors from "../../../stylesheets/colors";
 import SharedModal from "./shared_modal";
-import SearchField from "./search_field";
 
 const Container = styled.div`
   margin-left: ${props => props.marginLeft};
@@ -92,7 +91,6 @@ const Matrix = () => {
             <div className="d-flex">
                 <Sidebar/>
                 <SideDrawer/>
-
                 <Container width={`calc(100% + ${offset - 290}px)`} marginLeft={`${290 - offset}px`}>
                     <DrawerToggler
                         onClick={handleClick}
@@ -101,7 +99,6 @@ const Matrix = () => {
                         <i className={togglerCaret}></i>
                     </DrawerToggler>
                     <SubContainer>
-                        <SearchField/>
                         <div className="row justify-content-center">
                             <UnassignedTasksBox tasksFilter={positionToNum.toBeAssigned}/>
                         </div>

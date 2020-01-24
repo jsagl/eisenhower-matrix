@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import colors from "../../../stylesheets/colors";
 import CreateTaskButton from "./create_task_button";
+import SearchButton from "./search_buttons";
 
 const Container = styled.div`
   background-color: ${props => colors.primaryColor};
   height: 100%;
   position: fixed;
-  z-index: 1;
+  z-index: 5;
   width: 60px;
   display: flex;
   flex-direction: column;
@@ -33,6 +34,7 @@ const Sidebar = (props) => {
                 <Logo src={LogoUrl} alt=""/>
             </Brand>
             <CreateTaskButton/>
+            <SearchButton/>
         </Container>
     );
 };
