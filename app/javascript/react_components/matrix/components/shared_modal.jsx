@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import Modal from "react-bootstrap/Modal";
+import {Modal} from "react-bootstrap";
 
 import {closeModal} from "../actions";
 import TaskForm from "./forms/task_form";
