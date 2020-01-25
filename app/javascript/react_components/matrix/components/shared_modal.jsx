@@ -23,26 +23,41 @@ const SharedModal = () => {
 
     const handleClose = () => dispatch(closeModal());
 
-    let form = '';
-
     if (modalType === TASK_CREATION || modalType === TASK_UPDATE) {
-        form = <TaskForm/>
+        return (
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <TaskForm/>
+                </Modal.Body>
+            </Modal>
+        );
     } else if (modalType === CATEGORY_CREATION || modalType === CATEGORY_UPDATE) {
-        form = <CategoryForm/>
+        return (
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CategoryForm/>
+                </Modal.Body>
+            </Modal>
+        );
     } else if (modalType === MATRIX_CREATION || modalType === MATRIX_UPDATE) {
-        form = <MatrixForm/>
+        return (
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <MatrixForm/>
+                </Modal.Body>
+            </Modal>
+        );
     }
 
-    return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {form}
-            </Modal.Body>
-        </Modal>
-    );
 };
 
 export default SharedModal;
