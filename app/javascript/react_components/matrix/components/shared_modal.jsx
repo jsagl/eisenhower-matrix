@@ -23,7 +23,7 @@ const SharedModal = () => {
 
     const handleClose = () => dispatch(closeModal());
 
-    let form;
+    let form = '';
 
     if (modalType === TASK_CREATION || modalType === TASK_UPDATE) {
         form = <TaskForm/>
