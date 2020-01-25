@@ -2,6 +2,7 @@
   "name": "eisenhower_matrix",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.0.0-0",
     "@babel/preset-react": "^7.8.3",
     "@fortawesome/fontawesome-free": "^5.12.0",
     "@rails/actioncable": "^6.0.0",
