@@ -56,19 +56,7 @@ const SharedModal = () => {
                 </Modal.Body>
             </Modal>
         );
-    } else {
-        return (
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>error</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Hello
-                </Modal.Body>
-            </Modal>
-        );
     }
-
 };
 
 export default SharedModal;
