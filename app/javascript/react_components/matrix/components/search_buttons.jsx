@@ -13,7 +13,7 @@ const Drawer = styled.div`
   position: fixed;
   z-index: 6;
   left: 61px;
-  margin-top: -5px;
+  margin-top: 15px;
   background-color: ${colors.primaryColor};
   height: 50px;
   width: ${props => props.width};
@@ -57,7 +57,7 @@ const ClearButton = styled.button`
   border: none;
   padding-top: 1px;
   border-radius: 50px;
-  display: flex;
+  display: ${props => props.display};
   justify-content: center;
   align-items: center;
   font-size: 24px;
@@ -82,6 +82,8 @@ const SearchButtons = (props) => {
     const dispatch = useDispatch();
     const [drawerWidth, setDrawerWidth] = useState('0px');
     const [btnBackgroundColor, setBtnBackgroundColor] = useState(colors.primaryColor);
+    const [searchInput, setSearchInput] = useState('');
+    const [clearBtnDisplay, setClearBtnDisplay] = useState('none');
 
     const handleClick = () => {
         if (drawerWidth === '0px') {
@@ -94,14 +96,14 @@ const SearchButtons = (props) => {
         }
     };
 
-    const [searchInput, setSearchInput] = useState('');
-
-    const handleChange = (e) => {
+    const handleSearchChange = (e) => {
         setSearchInput(e.target.value);
         if (e.target.value === '') {
             dispatch(fetchTasks(matrixId));
+            setClearBtnDisplay('none');
         } else {
             dispatch(searchTasks(matrixId, e.target.value));
+            setClearBtnDisplay('flex');
         }
     };
 
@@ -112,15 +114,19 @@ const SearchButtons = (props) => {
         }
     };
 
-    const handleBlur = () => {
-        setDrawerWidth('0px');
-        setBtnBackgroundColor(colors.primaryColor);
-    };
+    // const handleBlur = (e) => {
+    //     setDrawerWidth('0px');
+    //     setBtnBackgroundColor(colors.primaryColor);
+    // };
 
     const clearFilters = () => {
+        setDrawerWidth('0px');
+        setBtnBackgroundColor(colors.primaryColor);
+
         if (searchInput !== '') {
             setSearchInput('');
             dispatch(fetchTasks(matrixId));
+            setClearBtnDisplay('none');
         }
     };
 
@@ -134,9 +140,9 @@ const SearchButtons = (props) => {
                     key="search-field"
                     name="searchInput"
                     placeholder="Search"
-                    onChange={handleChange}
+                    onChange={handleSearchChange}
                     onKeyDown={handleEscapeEnter}
-                    onBlur={handleBlur}
+                    // onBlur={handleBlur}
                     value={searchInput}
                 />
             </Drawer>
@@ -145,7 +151,7 @@ const SearchButtons = (props) => {
                 <i className="fas fa-search"></i>
             </SearchButton>
 
-            <ClearButton type="button" id="clear-filters-btn" onClick={clearFilters}>
+            <ClearButton type="button" id="clear-filters-btn" data-tip="Clear filters" onClick={clearFilters} display={clearBtnDisplay}>
                 <i className="fas fa-times"></i>
             </ClearButton>
         </Container>

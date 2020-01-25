@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { DndProvider } from 'react-dnd'
 import Backend from 'react-dnd-html5-backend'
 import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
 
 import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
@@ -89,6 +90,7 @@ const Matrix = () => {
     return (
         <DndProvider backend={Backend}>
             <div className="d-flex">
+                <ReactTooltip effect={'solid'} place={'right'} delayShow={500}/>
                 <Sidebar/>
                 <SideDrawer/>
                 <Container width={`calc(100% + ${offset - 290}px)`} marginLeft={`${290 - offset}px`}>

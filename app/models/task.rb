@@ -13,8 +13,8 @@ class Task < ApplicationRecord
   end
 
   pg_search_scope :overall_search,
-                  against: {name: 'A', description: 'C' },
-                  associated_against: { category: {name: 'B'} },
+                  against: {name: 'A', time_to_complete: 'B', description: 'D' },
+                  associated_against: { category: {name: 'C'} },
                   ignoring: :accents,
                   using: {
                       tsearch: { prefix: true, any_word: true},

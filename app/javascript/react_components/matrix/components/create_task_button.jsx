@@ -9,7 +9,7 @@ const Button = styled.button`
   background-color: ${colors.primaryColor};
   width: 40px;
   height: 40px;
-  margin: 20px 10px;
+  margin: 20px 10px 0 10px;
   border: none;
   border-radius: 50px;
   display: flex;
@@ -36,7 +36,7 @@ const CreateTaskButton = (props) => {
     };
 
     return (
-        <Button type="button" onClick={handleClick}>
+        <Button type="button" data-tip="Create task" onClick={handleClick}>
             <i className="fas fa-plus"></i>
         </Button>
     );
