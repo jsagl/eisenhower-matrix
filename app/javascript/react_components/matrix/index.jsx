@@ -28,7 +28,7 @@ const initialState = {
     categories: [],
     matrices: [],
     modal: {
-        display: false,
+        display: 'none',
         modalType: TASK_CREATION,
         modalProps: {title: 'Create task'}
     }

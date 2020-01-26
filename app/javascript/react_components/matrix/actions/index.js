@@ -58,7 +58,7 @@ const closeModal = () => {
     return {
         type: CLOSE_MODAL,
         payload: {
-            display: false,
+            display: 'none',
         }
     }
 };
@@ -67,7 +67,7 @@ const openModal = (modalType, modalProps) => {
     return {
         type: OPEN_MODAL,
         payload: {
-            display: true,
+            display: 'block',
             modalType: modalType,
             modalProps: modalProps
         }

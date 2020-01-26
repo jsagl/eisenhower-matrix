@@ -117,9 +117,9 @@ const Matrix = () => {
                         <div className="row justify-content-center">
                             <DoneTasksBox tasksFilter={positionToNum.done}/>
                         </div>
-                        <SharedModal/>
                     </SubContainer>
                 </Container>
+                <SharedModal/>
             </div>
         </DndProvider>
     );
