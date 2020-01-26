@@ -9,7 +9,7 @@ import ReactTooltip from 'react-tooltip';
 import Quadrant from './quadrant';
 import UnassignedTasksBox from "./unassigned_tasks_box";
 import DoneTasksBox from "./done_tasks_box";
-import {fetchCategories, fetchTasks} from "../actions";
+import {fetchCategories, fetchTasks, wakeApp} from "../actions";
 import Sidebar from './sidebar'
 import SideDrawer from './side_drawer'
 import colors from "../../../stylesheets/colors";
@@ -85,6 +85,12 @@ const Matrix = () => {
     useEffect(()=> {
         dispatch(fetchCategories(matrixId));
         dispatch(fetchTasks(matrixId));
+
+        const interval = setInterval(() => {
+            wakeApp()
+        }, 1740000);
+
+        return () => clearInterval(interval);
     }, [dispatch]);
 
     return (

@@ -21,6 +21,13 @@ const handleError = () => {
     document.location.reload()
 };
 
+const wakeApp = () => {
+    fetch(`/wakers`, { credentials: 'same-origin' })
+        .then(response => response.json());
+
+    return null;
+};
+
 const fetchTasks = (matrixId) => {
     const promise = fetch(`/api/v1/matrices/${matrixId}/tasks`, { credentials: 'same-origin' })
         .then(response => response.json());
@@ -268,6 +275,7 @@ const searchTasks = (matrixId, query) => {
 }
 
 export {
+    wakeApp,
     fetchTasks, FETCH_TASKS,
     createTask, CREATE_TASK,
     updateTask, UPDATE_TASK,

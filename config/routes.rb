@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :wakers, only: [:index]
   resources :matrices, only: [:show]
   root to: 'matrices#show'
 end
