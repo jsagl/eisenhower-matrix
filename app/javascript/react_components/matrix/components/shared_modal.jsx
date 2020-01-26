@@ -23,40 +23,27 @@ const SharedModal = () => {
 
     const handleClose = () => dispatch(closeModal());
 
-    if (modalType === TASK_CREATION || modalType === TASK_UPDATE) {
-        return (
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{title}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <TaskForm/>
-                </Modal.Body>
-            </Modal>
-        );
+    let form;
+
+    if (show === false) {
+        form = 'empty'
+    } else if (modalType === TASK_CREATION || modalType === TASK_UPDATE) {
+        form = <TaskForm/>
     } else if (modalType === CATEGORY_CREATION || modalType === CATEGORY_UPDATE) {
-        return (
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{title}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <CategoryForm/>
-                </Modal.Body>
-            </Modal>
-        );
+        form = <CategoryForm/>
     } else if (modalType === MATRIX_CREATION || modalType === MATRIX_UPDATE) {
-        return (
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{title}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <MatrixForm/>
-                </Modal.Body>
-            </Modal>
-        );
+        form = <MatrixForm/>
     }
+    return (
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {form}
+            </Modal.Body>
+        </Modal>
+    );
 };
 
 export default SharedModal;
