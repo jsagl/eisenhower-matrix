@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import {closeModal, createMatrix, updateMatrix} from '../../actions';
@@ -12,6 +12,12 @@ const MatrixForm = (props) => {
     const initialName = modalType === MATRIX_UPDATE ? modalProps.matrix.name : '';
 
     const [nameInput, setNameInput] = useState(initialName);
+
+    const focusedInput = useRef(null);
+
+    useEffect(() => {
+        focusedInput.current.focus()
+    }, []);
 
     const handleChange = (e) => {
         if (e.target.name === 'matrixNameInput') {
@@ -47,6 +53,7 @@ const MatrixForm = (props) => {
                     placeholder="Matrix name"
                     onChange={handleChange}
                     value={nameInput}
+                    ref={focusedInput}
                 />
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

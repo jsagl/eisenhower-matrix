@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import {Modal} from "react-bootstrap";
 import styled from "styled-components";
 
 import {closeModal} from "../actions";
@@ -15,6 +14,7 @@ import {
     TASK_CREATION,
     TASK_UPDATE
 } from "../constants/constants";
+import colors from "../../../stylesheets/colors";
 
 const BackDrop = styled.div`
     display: ${props => props.display};
@@ -29,10 +29,15 @@ const BackDrop = styled.div`
 
 const ModalContainer = styled.div`
     display: ${props => props.display};
-    position: relative;
+    position: fixed;
     width: auto;
-    max-width: 500px;
-    margin: 1.75rem auto;
+    z-index: 1042;
+    width: 500px;
+    top: 40%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -250px;
+    //margin: 1.75rem auto;
     pointer-events: none;
 `;
 
@@ -73,6 +78,12 @@ const SharedModal = () => {
 
     const handleClose = () => dispatch(closeModal());
 
+    const handleEscape = (e) => {
+        if (e.keyCode === 27) {
+            handleClose();
+        }
+    };
+
     let form;
 
     if (display === 'none') {
@@ -85,10 +96,19 @@ const SharedModal = () => {
         form = <MatrixForm/>
     }
 
+    useEffect(() => {
+        document.getElementById('modal-backdrop').addEventListener("mousedown", handleClose);
+
+        return () => {
+            document.getElementById('modal-backdrop').removeEventListener("mousedown", handleClose);
+        };
+    }, []);
+
     return (
-        <BackDrop display={display}>
+        <div>
+            <BackDrop display={display} id='modal-backdrop'/>
             <ModalContainer display={display}>
-                <ModalContent>
+                <ModalContent onKeyDown={handleEscape}>
                     <ModalHeader>
                             <h5 className="modal-title">{title}</h5>
                             <button type="button" className="close" onClick={handleClose}>
@@ -100,7 +120,7 @@ const SharedModal = () => {
                     </ModalBody>
                 </ModalContent>
             </ModalContainer>
-        </BackDrop>
+        </div>
     );
 };
 

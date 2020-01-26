@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
@@ -17,6 +17,11 @@ const CategoryForm = (props) => {
     const [nameInput, setNameInput] = useState(initialName);
     const [color, setColor] = useState(initialColor);
 
+    const focusedInput = useRef(null);
+
+    useEffect(() => {
+        focusedInput.current.focus()
+    }, []);
 
     const handleChange = (e) => {
         switch (e.target.name) {
@@ -58,6 +63,7 @@ const CategoryForm = (props) => {
                     placeholder="Category name"
                     onChange={handleChange}
                     value={nameInput}
+                    ref={focusedInput}
                 />
             </div>
             <div className="form-group row">

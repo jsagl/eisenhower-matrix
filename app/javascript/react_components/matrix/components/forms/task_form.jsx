@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker/es";
@@ -29,6 +29,12 @@ const TaskForm = (props) => {
     const [status, setStatus] = useState(initialStatus);
     const [timeToComplete, setTimeToComplete] = useState(initialTimeToComplete);
     const [dueDate, setDueDate] = useState(initialDate);
+
+    const focusedInput = useRef(null);
+
+    useEffect(() => {
+        focusedInput.current.focus()
+    }, []);
 
     let initialDefaultCategoryOption;
     if (modalType === TASK_CREATION) {
@@ -82,6 +88,7 @@ const TaskForm = (props) => {
                     placeholder="Task name"
                     onChange={handleChange}
                     value={nameInput}
+                    ref={focusedInput}
                 />
             </div>
             <div className="form-group">
