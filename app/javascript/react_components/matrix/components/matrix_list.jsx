@@ -75,6 +75,7 @@ const MatrixName = styled.div`
         transition: all .1s linear;
         &:hover {
           color: #b4b4b4;
+          cursor: pointer;
         }
       }
   }

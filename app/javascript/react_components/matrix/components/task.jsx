@@ -65,6 +65,10 @@ const Content = styled.div`
   @media (max-width: 1300px) {
     max-width: 150px;
   }
+  
+  @media (max-width: 1000px) {
+    max-width: 100px;
+  }
 `;
 
 const LeftSubContainer = styled.div`
