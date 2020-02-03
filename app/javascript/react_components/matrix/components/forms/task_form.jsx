@@ -141,6 +141,7 @@ const TaskForm = (props) => {
                         <DatePicker
                             id="date-picker"
                             className='form-control'
+                            autoComplete='new-password'
                             selected={dueDate}
                             onChange={date => {
                                 setDueDate(date);
