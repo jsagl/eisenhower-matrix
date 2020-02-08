@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import SimpleBar from 'simplebar-react';
 
 import Task from './task'
-import { updateTask } from "../actions";
+import {openModal, updateTask} from "../actions";
+import {TASK_CREATION} from "../constants/constants";
 
 const TopQuadrantLegend = styled.div`
   position: absolute;
@@ -48,6 +49,16 @@ const Title = styled.div`
   margin-left: 5px;
   margin-top: 5px;
   line-height: 1;
+  i {
+    margin-left: 10px;
+    font-size: 15px;
+    color: #cccccc;
+    transition: all .1s linear;
+    &:hover {
+      cursor: pointer;
+      color: #b4b4b4;
+    }
+  }
 `;
 
 const Quadrant = (props) => {
@@ -69,6 +80,16 @@ const Quadrant = (props) => {
         }
     };
 
+    const openNewTaskForm = () => {
+        const modalProps = {
+            title: 'Create task',
+            task: {
+                status: props.tasksFilter
+            }
+        };
+        dispatch(openModal(TASK_CREATION, modalProps))
+    };
+
     const translateValue = props.topLegend === '' ? '-68px' : '-50px';
 
     return (
@@ -79,7 +100,12 @@ const Quadrant = (props) => {
             <TopQuadrantLegend>{props.topLegend}</TopQuadrantLegend>
             <LeftQuadrantLegend translateValue={translateValue}>{props.leftLegend}</LeftQuadrantLegend>
             <Card>
-                <Title>{props.title}</Title>
+                <Title>
+                    {props.title}
+                    <i className="fas fa-plus"
+                       onClick={openNewTaskForm}
+                    ></i>
+                </Title>
                 <TasksContainer>
                     {
                         tasks.map((task) => {

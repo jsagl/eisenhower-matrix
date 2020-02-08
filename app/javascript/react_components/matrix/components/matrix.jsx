@@ -112,12 +112,12 @@ const Matrix = () => {
                         </div>
                         <br/>
                         <div className="row justify-content-center">
-                            <Quadrant title={'DO'} topLegend={'URGENT'} leftLegend={'IMPORTANT'} tasksFilter={positionToNum.importantUrgent}/>
-                            <Quadrant title={'DECIDE'} topLegend={'NOT URGENT'} leftLegend={''} tasksFilter={positionToNum.importantNotUrgent}/>
+                            <Quadrant title={'P1'} topLegend={'URGENT'} leftLegend={'IMPORTANT'} tasksFilter={positionToNum.importantUrgent}/>
+                            <Quadrant title={'P2'} topLegend={'NOT URGENT'} leftLegend={''} tasksFilter={positionToNum.importantNotUrgent}/>
                         </div>
                         <div className="row justify-content-center">
-                            <Quadrant title={'DELEGATE'} topLegend={''} leftLegend={'NOT IMPORTANT'} tasksFilter={positionToNum.notImportantUrgent}/>
-                            <Quadrant title={'DELETE'} topLegend={''} leftLegend={''} tasksFilter={positionToNum.notImportantNotUrgent}/>
+                            <Quadrant title={'P3'} topLegend={''} leftLegend={'NOT IMPORTANT'} tasksFilter={positionToNum.notImportantUrgent}/>
+                            <Quadrant title={'P4'} topLegend={''} leftLegend={''} tasksFilter={positionToNum.notImportantNotUrgent}/>
                         </div>
                         <br/>
                         <div className="row justify-content-center">

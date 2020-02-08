@@ -176,12 +176,17 @@ const Task = (props) => {
         const month = months[date.getMonth()];
         const day = date.getDate();
 
-        const formattedDate = `${month} ${day}`
+        const formattedDate = `${month} ${day}`;
+        const numOfDaysBeforeDueDate = (date - new Date()) / (1000 * 60 * 60 * 24)
 
-        if ((date - new Date()) < 0) {
+        if (numOfDaysBeforeDueDate < -1) {
             return 'Overdue'
+        } else if (numOfDaysBeforeDueDate >= -1 && numOfDaysBeforeDueDate < 0) {
+            return 'Today'
+        } else if (numOfDaysBeforeDueDate >= 0 && numOfDaysBeforeDueDate < 1) {
+            return 'Tomorr.';
         } else {
-            return `${month} ${day}`
+            return formattedDate
         }
     };
 
@@ -193,12 +198,16 @@ const Task = (props) => {
         let backgroundColor;
         let fontColor;
 
-        if (remainingDays < 1) {
+        if (remainingDays < -1) {
             backgroundColor = '#FFD6D4';
             fontColor = '#FF6961';
-        } else if (remainingDays >= 1 && remainingDays <= 7) {
+        } else if (remainingDays >= -1 && remainingDays < 1) {
             backgroundColor = '#FFE5B4';
             fontColor = '#FF7F00';
+        }
+        else if (remainingDays >= 1 && remainingDays <= 6) {
+            backgroundColor = '#FDFD96';
+            fontColor = '#FF8F00';
         } else {
             backgroundColor = '#D6FFD6';
             fontColor = '#47B747';

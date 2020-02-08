@@ -19,7 +19,7 @@ const TaskForm = (props) => {
     const initialName = modalType === TASK_UPDATE ? modalProps.task.name : '';
     const initialDescription = modalType === TASK_UPDATE ? modalProps.task.description : '';
     const initialCategory = modalType === TASK_UPDATE ? modalProps.task.category_id : categories[0].id;
-    const initialStatus = modalType === TASK_UPDATE ? modalProps.task.status : positionToNum.toBeAssigned;
+    const initialStatus = modalProps.task !== undefined ? modalProps.task.status : positionToNum.toBeAssigned;
     const initialTimeToComplete = modalType === TASK_UPDATE ? modalProps.task.time_to_complete : 15;
     const initialDate = (modalType === TASK_UPDATE) && (modalProps.task.due_date != null) ? new Date(modalProps.task.due_date) : null;
 
@@ -141,7 +141,7 @@ const TaskForm = (props) => {
                         <DatePicker
                             id="date-picker"
                             className='form-control'
-                            autoComplete='new-password'
+                            autoComplete='off'
                             selected={dueDate}
                             onChange={date => {
                                 setDueDate(date);
